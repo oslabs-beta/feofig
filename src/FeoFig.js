@@ -1,33 +1,27 @@
 import React from 'react';
-
-{/* < feo config = config1>
-  <children></children>
-</feo> */}
+import LazyLoad from './utils/LazyLoad';
 
 const Fig = ({children, config}) => {
-
-  // helper function to apply config
   const applyConfig = (child) => {
-    const props = {}
-    // insert logic here
-    if (config.lazyload.threshold) {
-      // apply props
-    };
-    if (config.lazyload.once) {};
-    
-
-    return React.cloneElement(props);
+    if (config && config.lazyload) {
+      return (
+        <LazyLoad
+          threshold={config.lazyload.threshold}
+          once={config.lazyload.once}
+        >
+          {child}
+        </LazyLoad>
+      );
+    }
+    return child;
   };
 
-  // Apply styles to each child
   const modifiedChildren = React.Children.map(children, (child) => {
     if (React.isValidElement(child)) {
-      // put helper function in here
+      return applyConfig(child);
     }
     return child;
   });
-
-  console.log(children);
 
   return <>{modifiedChildren}</>;
 };

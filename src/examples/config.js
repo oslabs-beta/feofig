@@ -1,9 +1,6 @@
-export const boldItalicize = {
-  bold : true,
-  italicize : true,
-};
-
-export const noStyle = {
-  bold : false,
-  italicize : false,
-};
+export const config1 = {
+  lazyload : {
+    threshold : 0.1,
+    once : true
+  }
+}
