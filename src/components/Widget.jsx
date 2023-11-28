@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Widget = ({ id, count: propCount, once }) => {
+const Widget = ({ id, count: propCount,}) => {
   const [isReady, setIsReady] = useState(true);
   const [count, setCount] = useState(1);
 
@@ -30,15 +30,6 @@ const Widget = ({ id, count: propCount, once }) => {
   return isReady ? (
     <div className="widget">
       <span className="widget-counter">{propCount}</span>
-      {once ? (
-        <div className="widget-text once">
-          <code>
-            &lt;LazyLoad once&gt;<br />
-            &nbsp;&nbsp;&lt;Widget /&gt;<br />
-            &lt;/LazyLoad&gt;
-          </code>
-        </div>
-      ) : (
         <div className="widget-text">
           <code>
             &lt;LazyLoad&gt;<br />
@@ -46,9 +37,7 @@ const Widget = ({ id, count: propCount, once }) => {
             &lt;/LazyLoad&gt;
           </code>
         </div>
-      )}
       <p>render times: {count}</p>
-      <p>props from parent: {id}</p>
     </div>
   ) : (
     <div className="widget loading">

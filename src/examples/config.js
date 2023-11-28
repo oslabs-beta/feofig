@@ -1,9 +1,9 @@
-export const boldItalicize = {
-  bold : true,
-  italicize : true,
+const lazyLoadConfig = {
+  lazyload: {
+    threshold: 0.9, // Customize as needed
+    once: false, // Set to true or false as per your requirement
+    // You can add more LazyLoad props here
+  },
 };
 
-export const noStyle = {
-  bold : false,
-  italicize : false,
-};
+export default lazyLoadConfig
