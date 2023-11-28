@@ -1,0 +1,50 @@
+.widget-list {
+  width: 800px;
+  margin: 0 auto;
+}
+.widget-list.overflow {
+  position: relative;
+  height: 500px;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+.widget {
+  position: relative;
+  border: 1px #ccc solid;
+  background: #eee;
+}
+.widget-counter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #ccc;
+  font: 120px/1 Arial;
+}
+.widget-text {
+  line-height: 16px;
+  width: 120px;
+  text-align: left;
+  margin: 0 auto;
+}
+.once code {
+  color: #f40;
+}
+.loading {
+  border: 1px #f40 dashed;
+}
+.loading,
+.widget {
+  width: 100%;
+  height: 200px;
+  text-align: center;
+  padding-top: 50px;
+  margin: 10px 0;
+}
+.op {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  padding: 10px;
+  width: 250px;
+  border: 1px #eee dotted;
+}
