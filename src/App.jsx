@@ -1,5 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
-import Home from './components/Home.jsx';
+import React from 'react';
 import Fig from './FeoFig.js';
 import lazyLoadConfig from './examples/config.js';
 import Widget from './components/Widget.jsx';
@@ -31,33 +30,31 @@ const App = () => {
   //   };
   // }, [containerRef, options]);
 
-  return (
-    <Fig config={lazyLoadConfig}>
-      <Widget/>
-    </Fig>
-  );
+  const widgets = [];
+
+  for (let i = 1; i <= 10; i++) {
+    widgets.push(<Widget id={`widget${i}`} count={i}></Widget>)
+  }
 
   // return (
-  //   <div style={{display:'flex', flexDirection:'column', height: '1000000px', width: '50%'}}>
-  //     <LazyLoad>
-  //       {/* <img src='https://rockschool.com/wp-content/uploads/2013/03/RS2013_0304web.jpg'></img> */}
-  //       <div style={{height: '10000px', width: '50%', backgroundColor:'grey'}}>Grey Box
-  //       </div>
-  //     </LazyLoad>
-  //     <LazyLoad>
-  //       <div style={{height: '10000px', width: '50%', backgroundColor:'black'}}>Black Box
-  //       </div>
-  //     </LazyLoad>
-  //     <LazyLoad>
-  //       <div style={{height: '10000px', width: '50%', backgroundColor:'purple'}}>Purple Box
-  //       </div>
-  //     </LazyLoad>
-  //     <LazyLoad>
-  //       <div style={{height: '10000px', width: '50%', backgroundColor:'green'}}>Green Box
-  //       </div>
-  //     </LazyLoad>
-  //   </div>
+  //   <Fig config={lazyLoadConfig}>
+  //     {widgets}
+  //   </Fig>
   // );
+
+  return (
+    <div style={{display:'flex', flexDirection:'column', height: '1000000px', width: '50%'}}>
+      <Fig config={lazyLoadConfig}>
+        <img src='https://rockschool.com/wp-content/uploads/2013/03/RS2013_0304web.jpg'></img>
+        <div style={{height: '10000px', width: '50%', backgroundColor:'grey'}}>Grey Box
+        </div>
+        <div style={{height: '10000px', width: '50%', backgroundColor:'black'}}>Black Box
+        </div>
+        <div style={{height: '10000px', width: '50%', backgroundColor:'purple'}}>Purple Box
+        </div>
+      </Fig>
+    </div>
+  );
 
   // return (
   //   <div className='app'>

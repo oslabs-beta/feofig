@@ -1,7 +1,9 @@
-export default lazyLoadConfig = {
+const lazyLoadConfig = {
   lazyload: {
-    threshold: 0.1, // Customize as needed
-    once: true, // Set to true or false as per your requirement
+    threshold: 0.9, // Customize as needed
+    once: false, // Set to true or false as per your requirement
     // You can add more LazyLoad props here
   },
 };
+
+export default lazyLoadConfig
