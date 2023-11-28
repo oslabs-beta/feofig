@@ -18,8 +18,7 @@ const Fig = ({ children, config }) => {
           alt={child.props.alt}
           className={child.props.className}
         >
-          {/* {child} */}
-          {/* {React.cloneElement(child, { className: `lazy ${child.props.className || ''}`, 'data-src': child.props.src })} */}
+          {child}
         </LazyLoad>
       );
     }

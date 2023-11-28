@@ -1,5 +1,5 @@
-import React, {useState, useEffect, useRef} from 'react';
-import {useInView} from 'react-intersection-observer';
+import React, { useState, useEffect, useRef } from 'react';
+import { useInView } from 'react-intersection-observer';
 import PropTypes from 'prop-types';
 
 // const LazyLoad = ({
@@ -220,7 +220,7 @@ import PropTypes from 'prop-types';
 //   );
 // };
 
-const LazyLoad = ({ src, alt, className, threshold }) => {
+const LazyLoad = ({ children, src, alt, className, threshold }) => {
   const imgRef = useRef(null);
 
   useEffect(() => {
@@ -229,14 +229,30 @@ const LazyLoad = ({ src, alt, className, threshold }) => {
       rootMargin: '0px',
       threshold: threshold,
     };
-    console.log(threshold)
+
+    // console.log("children: ", children)
+    // console.log(Array.isArray(children))
+
     const handleIntersection = (entries, observer) => {
       entries.forEach((entry) => {
-        console.log(`isIntersecting: ${entry.isIntersecting}`)
+        console.log(`isIntersecting: ${entry.isIntersecting}`);
         if (entry.isIntersecting) {
-          const img = entry.target;
-          img.src = img.getAttribute('data-src');
-          observer.unobserve(img);
+          console.log(entry);
+          console.log(entry.target);
+
+          const element = entry.target;
+          element.className = children.props.className;
+          console.log(element.nodeName);
+
+          if (element.nodeName === 'IMG') {
+            // img.src = img.getAttribute('data-src');
+            element.src = children.props.src;
+            observer.unobserve(element);
+          } else {
+            console.log(element.children);
+            element.innerHTML = children.props.children;
+            observer.unobserve(element);
+          }
         }
       });
     };
@@ -253,8 +269,18 @@ const LazyLoad = ({ src, alt, className, threshold }) => {
       }
     };
   }, []); // Empty dependency array to run the effect only once on mount
+
+  const returnRenderedElement = (child) => {
+    if (child.type === 'img')
+      return <>{React.cloneElement(children, { ref: imgRef, src: '' })}</>;
+    else
+      return <>{React.cloneElement(children, { ref: imgRef, children: '' })}</>;
+  };
+
+  const renderedElement = returnRenderedElement(children);
   
-  return <img ref={imgRef} className={`lazy ${className}`} data-src={src} alt={alt} />;
+  // return <img ref={imgRef} className={`lazy ${className}`} data-src={src} alt={alt} />;
+  return renderedElement
 };
 
 export default LazyLoad;
