@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-// import LazyLoad from '../../src/';
+import LazyLoad from '../utils/LazyLoad';
 import Widget from '../components/Widget';
 // import Operation from '../components/Operation';
 // import { uniqueId } from '../utils';
@@ -28,9 +28,9 @@ const Normal = () => {
       {/* <Operation type="normal" onClickUpdate={handleClick} /> */}
       <div className='widget-list'>
         {arr.map((el, index) => (
-          // <LazyLoad once={el.once} key={index} height={200} offset={[-100, 0]}>
-          <Widget once={el.once} id={el.uniqueId} count={index + 1} />
-          // </LazyLoad>
+          <LazyLoad once={el.once} key={index} height={200} offset={[-100, 0]}>
+            <Widget once={el.once} id={el.uniqueId} count={index + 1} />
+          </LazyLoad>
         ))}
       </div>
     </div>

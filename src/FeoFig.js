@@ -1,13 +1,18 @@
 import React from 'react';
 import LazyLoad from './utils/LazyLoad';
 
-const Fig = ({children, config}) => {
-  const applyConfig = (child) => {
-    if (config && config.lazyload) {
+const Fig = ({ children, config }) => {
+  const isLazyLoadEnabled = config && config.lazyload;
+
+  const wrapWithLazyLoad = (child, index) => {
+    if (isLazyLoadEnabled && React.isValidElement(child)) {
       return (
         <LazyLoad
-          threshold={config.lazyload.threshold}
-          once={config.lazyload.once}
+          key={index}
+          threshold={config.lazyload.threshold || 0}
+          once={config.lazyload.once || false}
+          height={config.lazyload.height || 200} // Default height, adjust as needed
+          offset={config.lazyload.offset || [0, 0]} // Default offset, adjust as needed
         >
           {child}
         </LazyLoad>
@@ -16,14 +21,11 @@ const Fig = ({children, config}) => {
     return child;
   };
 
-  const modifiedChildren = React.Children.map(children, (child) => {
-    if (React.isValidElement(child)) {
-      return applyConfig(child);
-    }
-    return child;
-  });
-
-  return <>{modifiedChildren}</>;
+  return (
+    <>
+      {React.Children.map(children, (child, index) => wrapWithLazyLoad(child, index))}
+    </>
+  );
 };
 
 export default Fig;
