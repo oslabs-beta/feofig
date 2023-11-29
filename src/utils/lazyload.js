@@ -237,8 +237,6 @@ const LazyLoad = ({ children, src, alt, className, threshold }) => {
       entries.forEach((entry) => {
         console.log(`isIntersecting: ${entry.isIntersecting}`);
         if (entry.isIntersecting) {
-          console.log(entry);
-          console.log(entry.target);
 
           const element = entry.target;
           element.className = children.props.className;
@@ -249,7 +247,8 @@ const LazyLoad = ({ children, src, alt, className, threshold }) => {
             element.src = children.props.src;
             observer.unobserve(element);
           } else {
-            console.log(element.children);
+            console.log("21321312", children.props.children)
+            // element.children = children.props.children
             element.innerHTML = children.props.children;
             observer.unobserve(element);
           }
@@ -272,9 +271,9 @@ const LazyLoad = ({ children, src, alt, className, threshold }) => {
 
   const returnRenderedElement = (child) => {
     if (child.type === 'img')
-      return <>{React.cloneElement(children, { ref: imgRef, src: '' })}</>;
+      return <>{React.cloneElement(children, { ref: imgRef, src: null })}</>;
     else
-      return <>{React.cloneElement(children, { ref: imgRef, children: '' })}</>;
+      return <>{React.cloneElement(children, { ref: imgRef, children: null })}</>;
   };
 
   const renderedElement = returnRenderedElement(children);
