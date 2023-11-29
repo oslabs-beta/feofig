@@ -1,21 +1,26 @@
 import React from 'react';
 import LazyLoad from './utils/lazyload';
 
-const Fig = ({ children, config }) => {
+const Fig = ({ children, config, placeholder }) => {
   const isLazyLoadEnabled = config && config.lazyload;
 
   const wrapWithLazyLoad = (child, index) => {
     if (isLazyLoadEnabled && React.isValidElement(child)) {
       // console.log(child.props.className)
       if (Array.isArray(child.props.children)) {
+        // console.log("THISSS: ", child.props.children)
         // return wrapWithLazyLoad(child.children);
-        child.props.children.forEach(child => {
-          // console.log(child)
-          if (typeof child === 'object') {
-            console.log(child.props.children)
+        // const wrappedChildren = React.Children.map(child.props.children, (nestedChild, nestedIndex) => wrapWithLazyLoad(nestedChild, nestedIndex))
+        // return React.cloneElement(child, {...child.props, key:index, wrappedChildren});
+
+        // child.props.children.forEach(nestedChild => {
+        //   console.log('THE CHILD: ', nestedChild.props)
+        //   if (typeof child === 'object') {
+        //     // console.log(child.props.children)
             
-          }
-          wrapWithLazyLoad(child, index)})
+        //   }
+        // //  return wrapWithLazyLoad(child, index)
+        // })
       }
       return (
         <LazyLoad
@@ -27,6 +32,7 @@ const Fig = ({ children, config }) => {
           src={child.props.src}
           alt={child.props.alt}
           className={child.props.className}
+          placeholder={placeholder}
         >
           {child}
         </LazyLoad>

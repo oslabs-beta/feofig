@@ -220,7 +220,7 @@ import PropTypes from 'prop-types';
 //   );
 // };
 
-const LazyLoad = ({ children, src, alt, className, threshold }) => {
+const LazyLoad = ({ children, src, alt, className, threshold, placeholder }) => {
   const imgRef = useRef(null);
 
   useEffect(() => {
@@ -248,8 +248,14 @@ const LazyLoad = ({ children, src, alt, className, threshold }) => {
             observer.unobserve(element);
           } else {
             console.log("21321312", children.props.children)
+            if (children.props.children.length) {
+              const childProps = [];
+              children.props.children.forEach((prop) => {
+                if (typeof prop !== "object") childProps.push(prop)
+              })
+              element.innerHTML = childProps;
+            }
             // element.children = children.props.children
-            element.innerHTML = children.props.children;
             observer.unobserve(element);
           }
         }
@@ -269,11 +275,17 @@ const LazyLoad = ({ children, src, alt, className, threshold }) => {
     };
   }, []); // Empty dependency array to run the effect only once on mount
 
+  console.log("children: ", children)
   const returnRenderedElement = (child) => {
-    if (child.type === 'img')
-      return <>{React.cloneElement(children, { ref: imgRef, src: null })}</>;
+    if (child.type === 'img'){
+      console.log(placeholder)
+      if (placeholder) return <>{React.cloneElement(placeholder, { ref: imgRef})}</>;
+      else 
+      return <>{React.cloneElement(children, { ref: imgRef, src: null})}</>;
+      
+    }
     else
-      return <>{React.cloneElement(children, { ref: imgRef, children: null })}</>;
+      return <>{React.cloneElement(children, { ref: imgRef, children: null})}</>;
   };
 
   const renderedElement = returnRenderedElement(children);
