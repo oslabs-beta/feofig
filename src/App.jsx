@@ -150,12 +150,9 @@ const App = () => {
           GOOD BYE
           <div className="comic"> 12121 BY212121E </div>
           <div className="comic"> GgdsgasdOOD BgsagsaYE </div>
-          <div className="comic"> GOdbzbsbe OD 4353BYE </div>{' '}
+          <div className="comic"> GOdbzbsbe OD 4353BYE </div>
+          {'??'}
         </div>
-        <div className="comic"> GOOD BYE </div>
-        <div className="comic"> GOOD BYE </div>
-        <div className="comic"> GOOD BYE </div>
-        <div className="comic"> GOOD BYE </div>
       </Fig>
     </div>
   );
