@@ -1,12 +1,22 @@
 import React from 'react';
 import LazyLoad from './utils/lazyload';
 
-const Fig = ({ children, config }) => {
+const Fig = ({ children, config, placeholder }) => {
   const isLazyLoadEnabled = config && config.lazyload;
 
   const wrapWithLazyLoad = (child, index) => {
     if (isLazyLoadEnabled && React.isValidElement(child)) {
-      console.log(child.props.className)
+      // console.log(child.props.className)
+      if (Array.isArray(child.props.children)) {
+        // return wrapWithLazyLoad(child.children);
+        child.props.children.forEach(child => {
+          // console.log(child)
+          if (typeof child === 'object') {
+            console.log(child.props.children)
+            
+          }
+          wrapWithLazyLoad(child, index)})
+      }
       return (
         <LazyLoad
           key={index}
@@ -17,9 +27,9 @@ const Fig = ({ children, config }) => {
           src={child.props.src}
           alt={child.props.alt}
           className={child.props.className}
+          placeholder={placeholder}
         >
           {child}
-          {/* {React.cloneElement(child, { className: `lazy ${child.props.className || ''}`, 'data-src': child.props.src })} */}
         </LazyLoad>
       );
     }

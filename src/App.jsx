@@ -124,13 +124,26 @@ const App = () => {
       >
         Black Box
       </div>
-      <Fig config={lazyLoadConfig}>
+      <Fig
+        config={lazyLoadConfig}
+        placeholder={
+          <img
+            className="placeholder"
+            src="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=is&k=20&c=_o_WQ-NIhIyiDOBe5kEHl9QAyUNeYxWz0d-oJkC2znk="
+            alt="Image Description"
+          />
+        }
+      >
         <img
           className="comic"
           src="https://dummyimage.com/700x300.png"
           alt="Image Description"
         />
-        <div className="comic"> H E L L O </div>
+        <div className="comic">
+          {' '}
+          H E L L O<div>hello</div>
+          <div>goodbye</div>
+        </div>
         <img
           className="comic"
           src="https://images.unsplash.com/photo-1472457897821-70d3819a0e24?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -146,16 +159,13 @@ const App = () => {
           src="https://dummyimage.com/700x300.png"
           alt="Image Description"
         />
-        <div className="comic">
+        <div style={{ height: '1000px', backgroundColor: 'grey' }}>
           GOOD BYE
-          <div className="comic"> 12121 BY212121E </div>
+          {/* <div className="comic"> 12121 BY212121E </div>
           <div className="comic"> GgdsgasdOOD BgsagsaYE </div>
-          <div className="comic"> GOdbzbsbe OD 4353BYE </div>{' '}
+          <div className="comic"> GOdbzbsbe OD 4353BYE </div> */}
+          {'??'}
         </div>
-        <div className="comic"> GOOD BYE </div>
-        <div className="comic"> GOOD BYE </div>
-        <div className="comic"> GOOD BYE </div>
-        <div className="comic"> GOOD BYE </div>
       </Fig>
     </div>
   );
