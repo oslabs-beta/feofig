@@ -20,10 +20,8 @@
   },
   "homepage": "https://github.com/oslabs-beta/feofig#readme",
   "dependencies": {
-    "prop-types": "^15.8.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-intersection-observer": "^9.5.3"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.23.2",
