@@ -6,6 +6,12 @@ const Fig = ({ children, config, placeholder }) => {
 
   const wrapWithLazyLoad = (child, index) => {
     if (isLazyLoadEnabled && React.isValidElement(child)) {
+      if(typeof child === 'string') {
+        console.log('STRING');
+      }
+      if (typeof child === 'function') {
+        console.log('FUNCTION')
+      }
       // console.log(child.props.className)
       if (Array.isArray(child.props.children)) {
         // return wrapWithLazyLoad(child.children);
