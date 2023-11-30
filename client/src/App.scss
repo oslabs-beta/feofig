@@ -1,0 +1,55 @@
+body {
+  background-color: rgb(190, 150, 150);
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #282c34;
+}
+.section {
+  height: 100vh;
+  width: 100%;
+}
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: cornflowerblue;
+  color: rgb(32, 36, 41);
+  font-weight: 900;
+  font-size: 18px;
+  width: 500px;
+  height: 250px;
+}
+.isVisible {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: cornflowerblue;
+  color: rgb(32, 36, 41);
+  font-size: 20px;
+  padding: 40px;
+}
+
+
+.image-container {
+border: 1px solid red;
+height: 500px
+}
+
+
+.comic {
+  height: 300px;
+  width: 700px;
+}
+
+.placeholder {
+  height: 500px;
+  width: 500px;
+}
