@@ -1,5 +1,5 @@
 import React from 'react';
-import Fig from '../../package/feofig.js';
+// import Fig from '../../package/feofig.js';
 import lazyLoadConfig from './examples/config.js';
 import './App.scss';
 
@@ -53,14 +53,14 @@ const App = () => {
       >
         Black Box
       </div>
-      <Fig config={lazyLoadConfig}
+      {/* <Fig config={lazyLoadConfig}
               placeholder={
                 <img
                   className="placeholder"
                   src="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=is&k=20&c=_o_WQ-NIhIyiDOBe5kEHl9QAyUNeYxWz0d-oJkC2znk="
                   alt="Image Description"
                 />
-              }>
+              }> */}
         <img
           className="comic"
           src="https://dummyimage.com/700x300.png"
@@ -88,7 +88,7 @@ const App = () => {
         <div style={{height:'1000px', backgroundColor:'grey'}}>
           GOOD BYE
         </div>
-      </Fig>
+      {/* </Fig> */}
     </div>
   );
 };
