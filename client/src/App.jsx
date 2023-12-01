@@ -3,7 +3,7 @@ import Fig from '../../package/feofig.js';
 import lazyLoadConfig from './examples/config.js';
 import './App.scss';
 
-const App = () => {  
+const App = () => {
   return (
     <div
       style={{
@@ -53,24 +53,59 @@ const App = () => {
       >
         Black Box
       </div>
-      <Fig config={lazyLoadConfig}
-              placeholder={
-                <img
-                  className="placeholder"
-                  src="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=is&k=20&c=_o_WQ-NIhIyiDOBe5kEHl9QAyUNeYxWz0d-oJkC2znk="
-                  alt="Image Description"
-                />
-              }>
-        <img
+      <Fig
+        config={lazyLoadConfig}
+        placeholder={
+          <img
+            className="placeholder"
+            src="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=is&k=20&c=_o_WQ-NIhIyiDOBe5kEHl9QAyUNeYxWz0d-oJkC2znk="
+            alt="Image Description"
+          />
+        }
+      >
+       
+
+           <img
           className="comic"
           src="https://dummyimage.com/700x300.png"
           alt="Image Description"
         />
-        <div style={{display:"flex", flexDirection:'column', height:'1000px', width:'300px', backgroundColor:"grey"}}> H E L L O
-          <div style={{height:'500px', width:'300px', backgroundColor:"grey"}}>hello</div>
-          <div style={{height:'500px', width:'300px',  backgroundColor:"pink"}}>goodbye</div> 
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            height: '1000px',
+            width: '300px',
+            backgroundColor: 'grey',
+          }}
+        >
+          <div
+            // style={{ height: '500px', width: '300px', backgroundColor: 'grey' }}
+            className='img1'
+          >
+                       <img
+          // className="comic"
+          src="https://dummyimage.com/700x300.png"
+          alt="Image Description"
+        />
+                   <img
+          className="comic"
+          src="https://dummyimage.com/700x300.png"
+          alt="Image Description"
+        />
+                   <img
+          className="comic"
+          src="https://dummyimage.com/700x300.png"
+          alt="Image Description"
+        />
+          </div>
+          <div
+            style={{ height: '500px', width: '300px', backgroundColor: 'pink' }}
+          >
+            goodbye
+          </div>
         </div>
-        <img
+        {/* <img
           className="comic"
           src="https://images.unsplash.com/photo-1472457897821-70d3819a0e24?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="Image Description"
@@ -85,9 +120,9 @@ const App = () => {
           src="https://dummyimage.com/700x300.png"
           alt="Image Description"
         />
-        <div style={{height:'1000px', backgroundColor:'grey'}}>
+        <div style={{ height: '1000px', backgroundColor: 'grey' }}>
           GOOD BYE
-        </div>
+        </div> */}
       </Fig>
     </div>
   );
@@ -98,3 +133,22 @@ export default App;
 //threshold controls how much of div has to be on screen
 //threshold = 1 means 100% of div has to be on screen
 //threshold needs to be able to be configured by div
+
+
+{/* <div
+              style={{
+                height: '500px',
+                width: '300px',
+                backgroundColor: 'pink',
+              }}
+            >
+              <div>999999</div>
+              {/* <div>11111111</div> */}
+            // </div>
+            // <div>
+            //   <div>
+            //     <div>
+            //       <div>69696969</div>
+            //     </div>
+            //   </div>
+            // </div> */}
