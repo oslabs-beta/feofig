@@ -4,10 +4,14 @@
     "rootDir": "./src",
     "strict": true,
     "module": "commonjs",
+    "allowJs": true,
+    "resolveJsonModule": true,
     "target": "es6",
     "jsx": "react",
     "esModuleInterop": true,
     "noImplicitAny": true,
+    "noUncheckedIndexedAccess": true,
+    
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules", "dist"]
