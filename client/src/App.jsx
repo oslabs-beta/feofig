@@ -1,10 +1,9 @@
 import React from 'react';
-import Fig from './FeoFig.js';
+import Fig from '../../package/feofig.js';
 import lazyLoadConfig from './examples/config.js';
-import Widget from './components/Widget.jsx';
 import './App.scss';
 
-const App = () => {
+const App = () => {  
   return (
     <div
       style={{
@@ -54,25 +53,23 @@ const App = () => {
       >
         Black Box
       </div>
-      <Fig
-        config={lazyLoadConfig}
-        placeholder={
-          <img
-            className="placeholder"
-            src="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=is&k=20&c=_o_WQ-NIhIyiDOBe5kEHl9QAyUNeYxWz0d-oJkC2znk="
-            alt="Image Description"
-          />
-        }
-      >
+      <Fig config={lazyLoadConfig}
+              placeholder={
+                <img
+                  className="placeholder"
+                  src="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=is&k=20&c=_o_WQ-NIhIyiDOBe5kEHl9QAyUNeYxWz0d-oJkC2znk="
+                  alt="Image Description"
+                />
+              }>
         <img
           className="comic"
           src="https://dummyimage.com/700x300.png"
           alt="Image Description"
         />
-        <div className="comic">
-          {' '}
-          H E L L O<div>hello</div>
-          <div>goodbye</div>
+        <div style={{display:"flex", flexDirection:'column', height:'1000px', width:'300px', backgroundColor:"grey"}}> H E L L O
+          <div style={{height:'500px', width:'300px', backgroundColor:"grey"}}>hello
+          <div>999999999</div></div>
+          <div style={{height:'500px', width:'300px',  backgroundColor:"pink"}}>goodbye</div> 
         </div>
         <img
           className="comic"
@@ -89,12 +86,8 @@ const App = () => {
           src="https://dummyimage.com/700x300.png"
           alt="Image Description"
         />
-        <div style={{ height: '1000px', backgroundColor: 'grey' }}>
+        <div style={{height:'1000px', backgroundColor:'grey'}}>
           GOOD BYE
-          {/* <div className="comic"> 12121 BY212121E </div>
-          <div className="comic"> GgdsgasdOOD BgsagsaYE </div>
-          <div className="comic"> GOdbzbsbe OD 4353BYE </div> */}
-          {'??'}
         </div>
       </Fig>
     </div>
