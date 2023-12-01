@@ -1,13 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {useEffect, useRef} from 'react';
 
 type LazyLoadProps = {
-  children : React.ReactNode;
-  threshold : number;
-  placeholder? : React.ReactNode;
-}
+  children: React.ReactElement;
+  threshold?: number;
+  placeholder?: React.ReactElement | null;
+};
 
-const LazyLoad : React.FC<LazyLoadProps> = ({ children, threshold, placeholder }) => {
-  const elementRef = useRef(null);
+const LazyLoad: React.FC<LazyLoadProps> = ({
+  children,
+  threshold,
+  placeholder,
+}) => {
+  const elementRef = useRef<null>(null);
 
   useEffect(() => {
     const options = {
@@ -16,13 +20,17 @@ const LazyLoad : React.FC<LazyLoadProps> = ({ children, threshold, placeholder }
       threshold: threshold || 0.5,
     };
 
-    const handleIntersection = (entries, observer) => {
+    const handleIntersection = (
+      entries: IntersectionObserverEntry[],
+      observer: IntersectionObserver
+    ) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const element = entry.target;
+          const element = entry.target as HTMLElement;
           if (element.nodeName === 'IMG') {
-            element.className = children.props.className; // replace placeholder className to img className
-            element.src = children.props.src; // replace placeholder src to img src
+            const imgElement = element as HTMLImageElement;
+            imgElement.className = children.props.className; // replace placeholder className to img className
+            imgElement.src = children.props.src; // replace placeholder src to img src
             observer.unobserve(element);
           } else {
             element.innerHTML = children.props.children;
@@ -31,7 +39,9 @@ const LazyLoad : React.FC<LazyLoadProps> = ({ children, threshold, placeholder }
         }
       });
     };
+
     const observer = new IntersectionObserver(handleIntersection, options);
+
     if (elementRef.current) {
       observer.observe(elementRef.current);
     }
@@ -42,13 +52,15 @@ const LazyLoad : React.FC<LazyLoadProps> = ({ children, threshold, placeholder }
     };
   }, []);
 
-  const returnRenderedElement = (children) => {
+  const returnRenderedElement = (
+    children: React.ReactElement
+  ): React.ReactElement => {
     if (children.type === 'img') {
       if (placeholder)
-        return React.cloneElement(placeholder, { ref: elementRef });
-      else return React.cloneElement(children, { ref: elementRef, src: null });
+        return React.cloneElement(placeholder, {ref: elementRef});
+      else return React.cloneElement(children, {ref: elementRef, src: null});
     } else
-      return React.cloneElement(children, { ref: elementRef, children: null });
+      return React.cloneElement(children, {ref: elementRef, children: null});
   };
 
   const newReactElement = returnRenderedElement(children);

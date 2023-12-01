@@ -1,5 +1,5 @@
 import React from 'react';
-import LazyLoad from './utils/lazyload';
+import LazyLoad from './utils/lazyload.ts';
 
 const Fig = ({ children, config, placeholder }) => {
 
