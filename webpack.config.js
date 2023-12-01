@@ -39,11 +39,15 @@ module.exports = {
         ],
       },
       {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
         test: /\.html$/i,
         loader: 'html-loader',
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
+        test: /\.(png|jpg|webp|gif|svg|mp4)$/,
         use: [
           {
             loader: 'file-loader',
