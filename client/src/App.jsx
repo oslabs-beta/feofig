@@ -68,6 +68,21 @@ const App = () => {
           src="https://dummyimage.com/700x300.png"
           alt="Image Description"
         />
+           <img
+          className="comic"
+          src="https://dummyimage.com/700x300.png"
+          alt="Image Description"
+        />
+           <img
+          className="comic"
+          src="https://dummyimage.com/700x300.png"
+          alt="Image Description"
+        />
+           <img
+          className="comic"
+          src="https://dummyimage.com/700x300.png"
+          alt="Image Description"
+        />
         <div
           style={{
             display: 'flex',
@@ -80,10 +95,16 @@ const App = () => {
           <div
             style={{ height: '500px', width: '300px', backgroundColor: 'grey' }}
           >
-            {' '}
-            hello
-            <div style={{ height: '500px', width: '300px', backgroundColor: 'pink' }}>999999999
-            <div>000000000</div></div>
+            <div
+              style={{
+                height: '500px',
+                width: '300px',
+                backgroundColor: 'pink',
+              }}
+            >
+              <div>999999</div>
+              <div>11111111</div>
+            </div>
             <div>
               <div>
                 <div>
