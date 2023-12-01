@@ -1,18 +1,14 @@
 {
   "compilerOptions": {
-    "outDir": "./package",
-    "rootDir": "./dev",
+    "outDir": "./dist",
+    "rootDir": "./src",
     "strict": true,
     "module": "commonjs",
-    "allowJs": true,
-    "resolveJsonModule": true,
     "target": "es6",
     "jsx": "react",
     "esModuleInterop": true,
     "noImplicitAny": true,
-    "noUncheckedIndexedAccess": true,
-    "declaration": true
   },
-  "include": ["**/*.ts", "**/*.tsx", "dev/utils/lazyload.ts"],
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules", "dist"]
 }
