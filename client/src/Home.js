@@ -1,8 +1,8 @@
 import React from 'react';
-import Fig from 'feofig';
+import Fig from '../../dev/feofig';
 import lazyLoadConfig from "./config"
 import image from "../public/placeholder.webp"
-import './style.scss'; // Importing the CSS file for styling
+import './style.scss';
 
 const figs = [
   { id: 1, name: 'Black Mission Figs', description: 'Sweet and densely flavored, perfect for baking and snacking.', imageUrl: 'https://www.melissas.com/cdn/shop/products/1-pound-image-of-black-mission-figs-fruit-28656452010028_600x600.jpg?v=1628114077' },
@@ -21,7 +21,7 @@ const placeholder =
 <img src={image} alt='figs coming soon' className="fig-image"/>
 
 
-const FigsForSale = () => {
+const Home = () => {
   return (
     <div className="figs-page">
       <header className="figs-header">
@@ -29,18 +29,21 @@ const FigsForSale = () => {
         <p>Welcome to your one-stop shop for exquisite fig  varieties!</p>
       </header>
 
-      <div className="figs-container">
-        {figs.map(fig => (
-          <div key={fig.id} className="fig-item">
-            <Fig config={lazyLoadConfig} placeholder={placeholder}>
-              <img src={fig.imageUrl} alt={fig.name} className="fig-image" />
-            </Fig>
-            <h3>{fig.name}</h3>
-            <p>{fig.description}</p>
-            <button className="buy-button">Buy Now</button>
-          </div>
-        ))}
-      </div>
+      {/* <Fig config={lazyLoadConfig} placeholder={placeholder}> */}
+        <div className="figs-container">
+          {figs.map(fig => (
+            <div key={fig.id} className="fig-item">
+              <Fig config={lazyLoadConfig} placeholder={placeholder}>
+                <img src={fig.imageUrl} alt={fig.name} className="fig-image" />
+              </Fig>
+              <h3>{fig.name}</h3>
+              <p>{fig.description}</p>
+              <button className="buy-button">Buy Now</button>
+            </div>
+          ))}
+        </div>
+      {/* </Fig> */}
+
 
       <footer className="figs-footer">
         <p>© 2023 The Fig Boutique. All rights reserved.</p>
@@ -49,4 +52,4 @@ const FigsForSale = () => {
   );
 };
 
-export default FigsForSale;
+export default Home;
