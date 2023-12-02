@@ -2,7 +2,7 @@ import React from 'react';
 import Fig from 'feofig';
 import lazyLoadConfig from "./config"
 import image from "../public/placeholder.webp"
-import './FigsForSale.css'; // Importing the CSS file for styling
+import './style.scss'; // Importing the CSS file for styling
 
 const figs = [
   { id: 1, name: 'Black Mission Figs', description: 'Sweet and densely flavored, perfect for baking and snacking.', imageUrl: 'https://www.melissas.com/cdn/shop/products/1-pound-image-of-black-mission-figs-fruit-28656452010028_600x600.jpg?v=1628114077' },

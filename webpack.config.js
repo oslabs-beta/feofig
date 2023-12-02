@@ -4,7 +4,7 @@ const path = require('path');
 const entry = path.resolve(__dirname, './client/src/index.js');
 
 const output = {
-  path: path.resolve(__dirname, 'dist'),
+  path: path.resolve(__dirname, 'client','dist'),
   filename: 'bundle.js',
 };
 
@@ -63,7 +63,7 @@ module.exports = {
   ],
   devServer: {
     static: {
-      directory: path.join(__dirname, 'dist'),
+      directory: path.join(__dirname, 'client', 'dist'),
       publicPath: '/',
     },
     host: 'localhost',
