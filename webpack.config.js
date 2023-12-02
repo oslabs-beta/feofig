@@ -28,6 +28,11 @@ module.exports = {
         },
       },
       {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        // exclude: /node_modules/,
+      },
+      {
         test: /\.s[ac]ss$/i,
         use: [
           // Creates `style` nodes from JS strings
@@ -76,7 +81,7 @@ module.exports = {
   },
   resolve: {
     // Enable importing JS / JSX files without specifying their extension
-    extensions: ['.js', '.jsx'],
+    extensions: ['.jsx', '.js', '.tsx', '.ts'],
     fallback: {
       fs: false,
       async_hooks: false,
