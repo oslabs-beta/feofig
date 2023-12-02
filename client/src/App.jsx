@@ -63,9 +63,22 @@ const App = () => {
           />
         }
       >
-       
-
-           <img
+        <img
+          className="comic"
+          src="https://dummyimage.com/700x300.png"
+          alt="Image Description"
+        />
+        <img
+          className="comic"
+          src="https://dummyimage.com/700x300.png"
+          alt="Image Description"
+        />
+        <img
+          className="comic"
+          src="https://dummyimage.com/700x300.png"
+          alt="Image Description"
+        />
+        <img
           className="comic"
           src="https://dummyimage.com/700x300.png"
           alt="Image Description"
@@ -80,24 +93,25 @@ const App = () => {
           }}
         >
           <div
-            // style={{ height: '500px', width: '300px', backgroundColor: 'grey' }}
-            className='img1'
+            style={{ height: '500px', width: '300px', backgroundColor: 'grey' }}
           >
-                       <img
-          // className="comic"
-          src="https://dummyimage.com/700x300.png"
-          alt="Image Description"
-        />
-                   <img
-          className="comic"
-          src="https://dummyimage.com/700x300.png"
-          alt="Image Description"
-        />
-                   <img
-          className="comic"
-          src="https://dummyimage.com/700x300.png"
-          alt="Image Description"
-        />
+            <div
+              style={{
+                height: '500px',
+                width: '300px',
+                backgroundColor: 'pink',
+              }}
+            >
+              <div>999999</div>
+              <div>11111111</div>
+            </div>
+            <div>
+              <div>
+                <div>
+                  <div>69696969</div>
+                </div>
+              </div>
+            </div>
           </div>
           <div
             style={{ height: '500px', width: '300px', backgroundColor: 'pink' }}
@@ -133,22 +147,3 @@ export default App;
 //threshold controls how much of div has to be on screen
 //threshold = 1 means 100% of div has to be on screen
 //threshold needs to be able to be configured by div
-
-
-{/* <div
-              style={{
-                height: '500px',
-                width: '300px',
-                backgroundColor: 'pink',
-              }}
-            >
-              <div>999999</div>
-              {/* <div>11111111</div> */}
-            // </div>
-            // <div>
-            //   <div>
-            //     <div>
-            //       <div>69696969</div>
-            //     </div>
-            //   </div>
-            // </div> */}

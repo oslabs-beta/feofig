@@ -1,7 +1,7 @@
 import React from 'react';
 import LazyLoad from './utils/lazyload';
 
-const Fig = ({ children, config, placeholder }) => {
+const Fig = ({children, config, placeholder}) => {
   const isLazyLoadEnabled = config && config.lazyload;
 
   const wrapWithLazyLoad = (child, index) => {
@@ -12,7 +12,7 @@ const Fig = ({ children, config, placeholder }) => {
           threshold={config.lazyload.threshold || 0}
           src={child.props.src}
           alt={child.props.alt}
-          className={child.props.className} mo
+          className={child.props.className}
           placeholder={placeholder}
         >
           {child}
@@ -24,7 +24,9 @@ const Fig = ({ children, config, placeholder }) => {
 
   return (
     <>
-      {React.Children.map(children, (child, index) => wrapWithLazyLoad(child, index))}
+      {React.Children.map(children, (child, index) =>
+        wrapWithLazyLoad(child, index)
+      )}
     </>
   );
 };
