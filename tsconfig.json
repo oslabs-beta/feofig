@@ -14,5 +14,5 @@
     "declaration": true
   },
   "include": ["**/*.ts", "**/*.tsx", "dev/utils/lazyload.ts"],
-  "exclude": ["node_modules", "dist"]
+  "exclude": ["node_modules", "dist", "./package"]
 }
