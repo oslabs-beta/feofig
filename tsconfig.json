@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "outDir": "./dist",
-    "rootDir": "./package",
+    "outDir": "./package",
+    "rootDir": "./dev",
     "strict": true,
     "module": "commonjs",
     "allowJs": true,
@@ -13,6 +13,6 @@
     "noUncheckedIndexedAccess": true,
     "declaration": true
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["**/*.ts", "**/*.tsx", "dev/utils/lazyload.ts"],
   "exclude": ["node_modules", "dist"]
 }
