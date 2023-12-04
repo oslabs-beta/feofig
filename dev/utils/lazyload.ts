@@ -1,16 +1,17 @@
 import React, {useEffect, useRef} from 'react';
 
 type LazyLoadProps = {
+  key: number,
   children: React.ReactElement;
   threshold?: number;
   placeholder?: React.ReactElement | null;
 };
 
-const LazyLoad: React.FC<LazyLoadProps> = ({
+const LazyLoad = ({
   children,
   threshold,
   placeholder,
-}) => {
+}: LazyLoadProps) => {
   const elementRef = useRef<null>(null);
 
   useEffect(() => {

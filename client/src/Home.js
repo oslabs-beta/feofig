@@ -1,5 +1,5 @@
 import React from 'react';
-import Fig from '../../dev/feofig';
+import Fig from '../../package/feofig';
 import lazyLoadConfig from "./config"
 import image from "../public/placeholder.webp"
 import './style.scss';
