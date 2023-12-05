@@ -1,5 +1,5 @@
 import React from 'react';
-import Fig from '../../package/feofig';
+import Fig from '../../dev/feofig';
 import lazyLoadConfig from "./config"
 import image from "../public/placeholder.webp"
 import './style.scss';
@@ -29,20 +29,25 @@ const Home = () => {
         <p>Welcome to your one-stop shop for exquisite fig  varieties!</p>
       </header>
 
-      {/* <Fig config={lazyLoadConfig} placeholder={placeholder}> */}
+      <Fig config={lazyLoadConfig} placeholder={placeholder}>
         <div className="figs-container">
           {figs.map(fig => (
             <div key={fig.id} className="fig-item">
-              <Fig config={lazyLoadConfig} placeholder={placeholder}>
+              {/* <Fig config={lazyLoadConfig} placeholder={placeholder}> */}
                 <img src={fig.imageUrl} alt={fig.name} className="fig-image" />
-              </Fig>
+              {/* </Fig> */}
               <h3>{fig.name}</h3>
               <p>{fig.description}</p>
+              {/* <div>
+                <div> HELLLLLLOOOOOO
+                  <img src={fig.imageUrl} alt={fig.name} className="fig-image" />
+                </div>
+              </div> */}
               <button className="buy-button">Buy Now</button>
             </div>
           ))}
         </div>
-      {/* </Fig> */}
+      </Fig>
 
 
       <footer className="figs-footer">
