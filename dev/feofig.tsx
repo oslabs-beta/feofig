@@ -27,7 +27,7 @@ const Fig = ({children, config, placeholder}: FigProps) => {
     }
 
     const imageIsolator = (node: React.ReactNode): React.ReactNode => {
-      if (!React.isValidElement(node)) return node; // Preserve non-element nodes
+      if (!React.isValidElement(node)) return node; // preserve non-element nodes like strings
 
       // if node is an image, wrap it with LazyLoad
       if (node.type === 'img') {
@@ -42,7 +42,9 @@ const Fig = ({children, config, placeholder}: FigProps) => {
         );
       }
 
-      // if node has children, recursively transform them
+      // can filter for more node types and apply other wrappers here
+
+      // if node has children, recursively transform them to fit react props children array format
       if (node.props && node.props.children) {
         const children = React.Children.toArray(node.props.children).map(
           imageIsolator

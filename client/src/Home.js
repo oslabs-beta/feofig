@@ -39,7 +39,7 @@ const Home = () => {
               <h3>{fig.name}</h3>
               <p>{fig.description}</p>
               {/* <div>
-                <div>
+                <div> HELLLLLLOOOOOO
                   <img src={fig.imageUrl} alt={fig.name} className="fig-image" />
                 </div>
               </div> */}
