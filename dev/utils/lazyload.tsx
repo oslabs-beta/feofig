@@ -24,15 +24,15 @@ const LazyLoad = ({children, threshold, placeholder}: LazyLoadProps) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const element = entry.target as HTMLElement;
-          if (element.nodeName === 'IMG') {
+          // if (element.nodeName === 'IMG') {
             const imgElement = element as HTMLImageElement;
             imgElement.className = children.props.className; // replace placeholder className to img className
             imgElement.src = children.props.src; // replace placeholder src to img src
             observer.unobserve(element);
-          } else {
+          // } else {
             // element.innerHTML = children.props.children;
-            observer.unobserve(element);
-          }
+            // observer.unobserve(element);
+          // }
         }
       });
     };

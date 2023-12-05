@@ -38,6 +38,11 @@ const Home = () => {
               {/* </Fig> */}
               <h3>{fig.name}</h3>
               <p>{fig.description}</p>
+              {/* <div>
+                <div>
+                  <img src={fig.imageUrl} alt={fig.name} className="fig-image" />
+                </div>
+              </div> */}
               <button className="buy-button">Buy Now</button>
             </div>
           ))}
