@@ -1,7 +1,7 @@
 const lazyLoadConfig = {
   lazyload: {
     threshold: 0.5, 
-    once: true, 
+    once: false
     // more lazyload props later
   },
   // debounce: {

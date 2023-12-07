@@ -11,9 +11,9 @@ const placeholder =
 const App = () => {
   return (
     <div className='app'>
-      {/* <Fig config={lazyLoadConfig} placeholder={placeholder}> */}
+      <Fig config={lazyLoadConfig} placeholder={placeholder}>
         <Home />
-      {/* </Fig> */}
+      </Fig>
     </div>
       
   );
