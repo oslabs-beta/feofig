@@ -23,6 +23,10 @@
 // FOUT: Flash of unstyled text
 
 
+
+//it turns out font-display basically does everything we would want, I don't think there is a way 
+
+
 //example configuration:
 
 const fontdisableConfig = {
