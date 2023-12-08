@@ -1,6 +1,12 @@
 import React from 'react';
 import LazyLoad from './utils/lazyload';
-import {Config, LazyLoadConfig, ThrottleConfig, DebounceConfig} from './types'
+import validateConfigs from './aux/validateConfig';
+import {
+  Config,
+  LazyLoadConfig,
+  ThrottleConfig,
+  DebounceConfig,
+} from './aux/types';
 
 type FigProps = {
   children: React.ReactElement;
@@ -9,15 +15,16 @@ type FigProps = {
 };
 
 const Fig = ({children, config, placeholder}: FigProps) => {
+  // might get rid of these since it doesn't type guard well
   const isLazyLoadEnabled = config && config.lazyload;
   const isDebounceEnabled = config && config.debounce;
   const isThrottleEnabled = config && config.throttle;
   const isTestingEnabled = config && config.test;
 
-  console.log(children);
+  // tests to see if user inputs for config are valid, throws error if not
+  validateConfigs(config);
 
   const elementIsolator = (node: React.ReactNode): React.ReactNode => {
-
     // check if the node is a Fig component
     if (React.isValidElement(node) && node.type === Fig) {
       return node;
@@ -58,11 +65,11 @@ const Fig = ({children, config, placeholder}: FigProps) => {
 
     // if node has children, recursively transform them to fit react props children array format
     if (node.props && (node as React.ReactElement).props.children) {
-      const children = React.Children.toArray((node as React.ReactElement).props.children).map(
-        elementIsolator
-      );
+      const children = React.Children.toArray(
+        (node as React.ReactElement).props.children
+      ).map(elementIsolator);
 
-      return React.cloneElement((node as React.ReactElement), {
+      return React.cloneElement(node as React.ReactElement, {
         ...node.props,
         children: children,
       });
