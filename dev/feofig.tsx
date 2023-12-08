@@ -1,7 +1,7 @@
 import React from 'react';
 import LazyLoad from './utils/lazyload';
-import validateConfigs from './aux/validateConfig';
-import {FigProps} from './aux/types';
+import validateConfigs from './types/validateConfig';
+import {FigProps} from './types/types';
 
 const Fig = ({children, config, placeholder}: FigProps) => {
   // tests to see if user inputs for config are valid, throws error if not
