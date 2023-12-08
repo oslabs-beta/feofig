@@ -24,6 +24,7 @@ const Fig = ({children, config, placeholder}: FigProps) => {
   // tests to see if user inputs for config are valid, throws error if not
   validateConfigs(config);
 
+  // recursively iterates through elements to find desired type to wrap
   const elementIsolator = (node: React.ReactNode): React.ReactNode => {
     // check if the node is a Fig component
     if (React.isValidElement(node) && node.type === Fig) {
@@ -79,12 +80,12 @@ const Fig = ({children, config, placeholder}: FigProps) => {
   };
 
   const wrapper = (child: React.ReactElement, index: number) => {
-    if (!isLazyLoadEnabled || !React.isValidElement(child)) {
+    if (!React.isValidElement(child)) {
       return child;
     }
 
     // calls recursive function
-    if (isLazyLoadEnabled) {
+    if (isLazyLoadEnabled || isDebounceEnabled || isThrottleEnabled) {
       return elementIsolator(child) || child;
     }
   };
