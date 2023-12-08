@@ -13,6 +13,7 @@ const LazyLoad = ({
   useEffect(() => {
     const options = {
       root: null,
+      // PROB NEEDS CHANGE: rootmargin default is '0px 0px 0px 0px'
       rootMargin: offset, // user config for offset
       threshold: threshold, // user config for threshold
     };
@@ -26,7 +27,6 @@ const LazyLoad = ({
         if (entry.isIntersecting) {
           image.className = children.props.className; // replace placeholder className to img className
           image.src = children.props.src; // replace placeholder src to img src
-
           if (once) observer.unobserve(image);
         } else if (!once && !entry.isIntersecting) {
           // prioritizes local image placeholder if it exists
