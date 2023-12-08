@@ -1,6 +1,6 @@
 import React from 'react';
 import Fig from '../../dev/feofig';
-import lazyLoadConfig from './config';
+import {config1} from './config';
 import image from '../public/placeholder.webp';
 import './style.scss';
 
@@ -82,7 +82,7 @@ const placeholder = (
 
 const Home = () => {
   return (
-    <Fig config={lazyLoadConfig} placeholder={placeholder}>
+    <Fig config={config1} placeholder={placeholder}>
       <div className='figs-page'>
         <header className='figs-header'>
           <h1>The Fig Boutique</h1>

@@ -1,6 +1,6 @@
 import React from 'react';
 import Fig from '../../dev/feofig';
-import lazyLoadConfig from "./config"
+import {config1} from "./config"
 import image from "../public/placeholder.webp"
 import Home from './Home.js';
 import './style.scss';
@@ -11,7 +11,7 @@ const placeholder =
 const App = () => {
   return (
     <div className='app'>
-      <Fig config={lazyLoadConfig} placeholder={placeholder}>
+      <Fig config={config1} placeholder={placeholder}>
         <Home />
       </Fig>
     </div>
