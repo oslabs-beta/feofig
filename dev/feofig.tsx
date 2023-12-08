@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import LazyLoad from './utils/lazyload';
 
 type Element = React.ReactElement;
@@ -9,7 +9,7 @@ type Config = {
 
 type LazyLoadConfig = {
   threshold?: number;
-  once?: false;
+  once?: boolean;
 };
 
 type FigProps = {
@@ -21,53 +21,62 @@ type FigProps = {
 const Fig = ({children, config, placeholder}: FigProps) => {
   const isLazyLoadEnabled = config && config.lazyload;
 
-  const wrapWithLazyLoad = (child: Element, index: number) => {
+  const elementIsolator = (node: React.ReactNode): React.ReactNode => {
+    // preserves non-element nodes like strings
+    if (!React.isValidElement(node)) return node;
+
+    // if node is an image, wrap it with LazyLoad
+    if (node.type === 'img') {
+      return (
+        <LazyLoad
+          key={crypto.randomUUID()}
+          threshold={
+            config.lazyload?.threshold === undefined
+              ? 0
+              : config.lazyload?.threshold
+          }
+          placeholder={placeholder}
+          once={config.lazyload?.once === undefined ? true : false}
+        >
+          {node}
+        </LazyLoad>
+      );
+    }
+
+    // can filter for more node types and apply other wrappers here
+
+    // if node has children, recursively transform them to fit react props children array format
+    if (node.props && node.props.children) {
+      const children = React.Children.toArray(node.props.children).map(
+        elementIsolator
+      );
+
+      return React.cloneElement(node, {
+        ...node.props,
+        children: children,
+      });
+    }
+
+    return node;
+  };
+
+  const wrapper = (child: Element, index: number) => {
     if (!isLazyLoadEnabled || !React.isValidElement(child)) {
       return child;
     }
 
-    const imageIsolator = (node: React.ReactNode): React.ReactNode => {
-      if (!React.isValidElement(node)) return node; // preserve non-element nodes like strings
-
-      // if node is an image, wrap it with LazyLoad
-      if (node.type === 'img') {
-        return (
-          <LazyLoad
-            key={index}
-            threshold={config.lazyload?.threshold || 0}
-            placeholder={placeholder}
-          >
-            {node}
-          </LazyLoad>
-        );
-      }
-
-      // can filter for more node types and apply other wrappers here
-
-      // if node has children, recursively transform them to fit react props children array format
-      if (node.props && node.props.children) {
-        const children = React.Children.toArray(node.props.children).map(
-          imageIsolator
-        );
-
-        return React.cloneElement(node, {
-          ...node.props,
-          children: children,
-        });
-      }
-
-      return node;
-    };
-
-    return imageIsolator(child) || child;
+    // calls recursive function
+    if (isLazyLoadEnabled) {
+      return elementIsolator(child) || child;
+    }
+    
   };
 
   return (
     <>
       {React.Children.map(children, (child, index) =>
-        wrapWithLazyLoad(child, index)
+        wrapper(child, index)
       )}
-      {console.log(children)}
     </>
   );
 };
