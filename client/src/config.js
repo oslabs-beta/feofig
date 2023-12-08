@@ -1,19 +1,30 @@
-const lazyLoadConfig = {
+export const config1 = {
   lazyload: {
-    threshold: 0.5, 
-    once: false
-    // more lazyload props later
+    threshold: 0.5,
+    once: true,
+    // offset: '100px'
+    // throttle
+    // debounce
+    // hello:''
   },
-  // debounce: {
-    // delay:   
-  // },
+  debounce: {
+    delay: 100,
+    target: ['searchbar', 'autocomplete'], // if no array, then defaults to all
+  },
+  throttle: {
+    delay: 100,
+    target: ['searchbar', 'autocomplete'], // if no array, then defaults to all
+  },
+  test: true, // tentative
+
   // pre-fetching: true,
   // disableCSSanimations : true,
   // disableCustomFonts: true,
 };
 
-// const lazyLoadConfig2 = {
-  // more configs here
-//}
+export const config2 = {
+}
 
-export default lazyLoadConfig
+export const adaptiveLoading = {
+  '3g': {},
+};
