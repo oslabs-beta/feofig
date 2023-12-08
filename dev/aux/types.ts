@@ -20,3 +20,18 @@ export type DebounceConfig = {
   delay: number;
   target?: string[];
 };
+
+export type FigProps = {
+  children: React.ReactElement;
+  config: Config;
+  placeholder?: React.ReactElement;
+};
+
+export type LazyLoadProps = {
+  key: string;
+  children: React.ReactElement;
+  threshold?: number;
+  placeholder?: React.ReactElement | null;
+  once?: boolean;
+  offset?: string;
+};

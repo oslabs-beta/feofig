@@ -5,6 +5,7 @@ export const config1 = {
     // offset: '100px'
     // throttle
     // debounce
+    // hello:''
   },
   debounce: {
     delay: 100,

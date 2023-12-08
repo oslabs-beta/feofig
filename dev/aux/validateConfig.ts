@@ -16,7 +16,7 @@ const validateConfigs = (config: Config) => {
   );
   if (invalidProps.length > 0) {
     throw new Error(
-      `Lazyload: Invalid properties found: ${invalidProps.join(', ')}`
+      `Invalid properties found in the Configuration file: ${invalidProps.join(', ')}`
     );
   }
 
@@ -32,7 +32,7 @@ const validateConfigs = (config: Config) => {
     );
     if (invalidProps.length > 0) {
       throw new Error(
-        `Lazyload: Invalid properties found: ${invalidProps.join(', ')}`
+        `Invalid properties found in the Lazyload Configuration: ${invalidProps.join(', ')}`
       );
     }
 
@@ -59,6 +59,8 @@ const validateConfigs = (config: Config) => {
         'Lazyload: Offset must be a string containing a number followed by px'
       );
   }
+
+  // add more config validations below:
 };
 
 export default validateConfigs;

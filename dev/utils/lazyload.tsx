@@ -1,24 +1,20 @@
 import React, {useEffect, useRef} from 'react';
+import {LazyLoadProps} from '../aux/types';
 
-type LazyLoadProps = {
-  key: string;
-  children: React.ReactElement;
-  threshold?: number;
-  placeholder?: React.ReactElement | null;
-  once?: boolean;
-  offset?: string;
-};
-
-const LazyLoad = ({children, threshold=0, placeholder, once, offset='0px'}: LazyLoadProps) => {
+const LazyLoad = ({
+  children,
+  threshold = 0,
+  placeholder,
+  once,
+  offset = '0px',
+}: LazyLoadProps) => {
   const elementRef = useRef<null>(null);
-
-  // maybe add checks here to validate offset and threshold values
 
   useEffect(() => {
     const options = {
       root: null,
-      rootMargin: offset,
-      threshold: threshold,
+      rootMargin: offset, // user config for offset
+      threshold: threshold, // user config for threshold
     };
 
     const handleIntersection = (
@@ -33,6 +29,7 @@ const LazyLoad = ({children, threshold=0, placeholder, once, offset='0px'}: Lazy
 
           if (once) observer.unobserve(image);
         } else if (!once && !entry.isIntersecting) {
+          // prioritizes local image placeholder if it exists
           if (children.props.placeholder) {
             image.className = children.props.placeholder.props.className;
             image.src = children.props.placeholder.props.src;
@@ -59,7 +56,9 @@ const LazyLoad = ({children, threshold=0, placeholder, once, offset='0px'}: Lazy
   const returnRenderedElement = (
     children: React.ReactElement
   ): React.ReactElement => {
-    if (children.props.placeholder) return React.cloneElement(children.props.placeholder, {ref: elementRef})
+    // prioritizes local image placeholder if it exists
+    if (children.props.placeholder)
+      return React.cloneElement(children.props.placeholder, {ref: elementRef});
     if (placeholder) return React.cloneElement(placeholder, {ref: elementRef});
     else return React.cloneElement(children, {ref: elementRef, src: null});
   };
