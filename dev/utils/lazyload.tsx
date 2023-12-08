@@ -1,20 +1,21 @@
 import React, {useEffect, useRef} from 'react';
 
 type LazyLoadProps = {
-  key: number;
+  key: string;
   children: React.ReactElement;
   threshold?: number;
   placeholder?: React.ReactElement | null;
+  once?: boolean;
 };
 
-const LazyLoad = ({children, threshold, placeholder}: LazyLoadProps) => {
+const LazyLoad = ({children, threshold, placeholder, once}: LazyLoadProps) => {
   const elementRef = useRef<null>(null);
 
   useEffect(() => {
     const options = {
       root: null,
       rootMargin: '0px',
-      threshold: threshold || 0.5,
+      threshold: threshold,
     };
 
     const handleIntersection = (
@@ -22,17 +23,14 @@ const LazyLoad = ({children, threshold, placeholder}: LazyLoadProps) => {
       observer: IntersectionObserver
     ) => {
       entries.forEach((entry) => {
+        const image = entry.target as HTMLImageElement;
         if (entry.isIntersecting) {
-          const element = entry.target as HTMLElement;
-          // if (element.nodeName === 'IMG') {
-            const imgElement = element as HTMLImageElement;
-            imgElement.className = children.props.className; // replace placeholder className to img className
-            imgElement.src = children.props.src; // replace placeholder src to img src
-            observer.unobserve(element);
-          // } else {
-            // element.innerHTML = children.props.children;
-            // observer.unobserve(element);
-          // }
+          image.className = children.props.className; // replace placeholder className to img className
+          image.src = children.props.src; // replace placeholder src to img src
+          if (once) observer.unobserve(image);
+        } else if (!once && !entry.isIntersecting) {
+          image.className = placeholder?.props.className;
+          image.src = placeholder?.props.src;
         }
       });
     };
@@ -52,11 +50,8 @@ const LazyLoad = ({children, threshold, placeholder}: LazyLoadProps) => {
   const returnRenderedElement = (
     children: React.ReactElement
   ): React.ReactElement => {
-    if (children.type === 'img') {
-      if (placeholder)
-        return React.cloneElement(placeholder, {ref: elementRef});
-      else return React.cloneElement(children, {ref: elementRef, src: null});
-    } else return React.cloneElement(children, {ref: elementRef});
+    if (placeholder) return React.cloneElement(placeholder, {ref: elementRef});
+    else return React.cloneElement(children, {ref: elementRef, src: null});
   };
 
   const newReactElement = returnRenderedElement(children);
