@@ -1,5 +1,5 @@
 import React, {useEffect, useRef} from 'react';
-import {LazyLoadProps} from '../aux/types';
+import {LazyLoadProps} from '../types/types';
 
 const LazyLoad = ({
   children,
