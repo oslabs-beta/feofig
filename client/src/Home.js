@@ -22,6 +22,7 @@ const placeholder =
 
 
 const Home = () => {
+
   return (
     <div className="figs-page">
       <header className="figs-header">
@@ -58,3 +59,7 @@ const Home = () => {
 };
 
 export default Home;
+
+
+// PerformanceResourceTiming.responseStart
+// PerformanceResourceTiming.responseEnd

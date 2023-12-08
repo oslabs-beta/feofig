@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import LazyLoad from './utils/lazyload';
 
 type Element = React.ReactElement;
@@ -19,6 +19,20 @@ type FigProps = {
 };
 
 const Fig = ({children, config, placeholder}: FigProps) => {
+    useEffect(() => {
+    const observer = new PerformanceObserver((list) => {
+      const a = list.getEntries()
+      // console.log(a)
+      // if (a.length === 1)
+      const b = a[a.length - 1] as PerformanceResourceTiming
+      const c = a[0] as PerformanceResourceTiming
+      console.log((b.responseEnd - c.redirectStart))
+    });
+    
+    observer.observe({ type: "resource", buffered: true });
+  }, [])
+
+
   const isLazyLoadEnabled = config && config.lazyload;
 
   const wrapWithLazyLoad = (child: Element, index: number) => {
