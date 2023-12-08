@@ -6,15 +6,18 @@ type LazyLoadProps = {
   threshold?: number;
   placeholder?: React.ReactElement | null;
   once?: boolean;
+  offset?: string;
 };
 
-const LazyLoad = ({children, threshold, placeholder, once}: LazyLoadProps) => {
+const LazyLoad = ({children, threshold=0, placeholder, once, offset='0px'}: LazyLoadProps) => {
   const elementRef = useRef<null>(null);
+
+  // maybe add checks here to validate offset and threshold values
 
   useEffect(() => {
     const options = {
       root: null,
-      rootMargin: '0px',
+      rootMargin: offset,
       threshold: threshold,
     };
 

@@ -1,27 +1,6 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import LazyLoad from './utils/lazyload';
-
-type Config = {
-  lazyload?: LazyLoadConfig;
-  throttle?: ThrottleConfig; // not added
-  debounce?: DebounceConfig;
-  test?: boolean; // tentative and not added
-};
-
-type LazyLoadConfig = {
-  threshold?: number;
-  once?: boolean;
-};
-
-type ThrottleConfig = {
-  delay: number;
-  target?: string[];
-};
-
-type DebounceConfig = {
-  delay: number;
-  target?: string[];
-};
+import {Config, LazyLoadConfig, ThrottleConfig, DebounceConfig} from './types'
 
 type FigProps = {
   children: React.ReactElement;
@@ -53,17 +32,10 @@ const Fig = ({children, config, placeholder}: FigProps) => {
         return (
           <LazyLoad
             key={crypto.randomUUID()}
-            threshold={
-              config.lazyload?.threshold === undefined
-                ? 0
-                : config.lazyload?.threshold
-            }
+            threshold={config.lazyload?.threshold || 0}
             placeholder={placeholder}
-            once={
-              config.lazyload?.once || config.lazyload?.once === undefined
-                ? true
-                : false
-            }
+            once={config.lazyload?.once !== false}
+            offset={config.lazyload?.offset || '0px'}
           >
             {node}
           </LazyLoad>
