@@ -1,21 +1,21 @@
 import React, {useEffect, useRef} from 'react';
+import {LazyLoadProps} from '../aux/types';
 
-type LazyLoadProps = {
-  key: string;
-  children: React.ReactElement;
-  threshold?: number;
-  placeholder?: React.ReactElement | null;
-  once?: boolean;
-};
-
-const LazyLoad = ({children, threshold, placeholder, once}: LazyLoadProps) => {
+const LazyLoad = ({
+  children,
+  threshold = 0,
+  placeholder,
+  once,
+  offset = '0px',
+}: LazyLoadProps) => {
   const elementRef = useRef<null>(null);
 
   useEffect(() => {
     const options = {
       root: null,
-      rootMargin: '0px',
-      threshold: threshold,
+      // PROB NEEDS CHANGE: rootmargin default is '0px 0px 0px 0px'
+      rootMargin: offset, // user config for offset
+      threshold: threshold, // user config for threshold
     };
 
     const handleIntersection = (
@@ -29,8 +29,14 @@ const LazyLoad = ({children, threshold, placeholder, once}: LazyLoadProps) => {
           image.src = children.props.src; // replace placeholder src to img src
           if (once) observer.unobserve(image);
         } else if (!once && !entry.isIntersecting) {
-          image.className = placeholder?.props.className;
-          image.src = placeholder?.props.src;
+          // prioritizes local image placeholder if it exists
+          if (children.props.placeholder) {
+            image.className = children.props.placeholder.props.className;
+            image.src = children.props.placeholder.props.src;
+          } else {
+            image.className = placeholder?.props.className;
+            image.src = placeholder?.props.src;
+          }
         }
       });
     };
@@ -50,6 +56,9 @@ const LazyLoad = ({children, threshold, placeholder, once}: LazyLoadProps) => {
   const returnRenderedElement = (
     children: React.ReactElement
   ): React.ReactElement => {
+    // prioritizes local image placeholder if it exists
+    if (children.props.placeholder)
+      return React.cloneElement(children.props.placeholder, {ref: elementRef});
     if (placeholder) return React.cloneElement(placeholder, {ref: elementRef});
     else return React.cloneElement(children, {ref: elementRef, src: null});
   };
