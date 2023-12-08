@@ -51,7 +51,7 @@ const Fig = ({children, config, placeholder}: FigProps) => {
                 : config.lazyload?.threshold
             }
             placeholder={placeholder}
-            once={config.lazyload?.once === undefined ? true : false}
+            once={config.lazyload?.once || config.lazyload?.once === undefined ? true : false}
           >
             {node}
           </LazyLoad>

@@ -1,7 +1,7 @@
 export const config1 = {
   lazyload: {
     threshold: 0.5,
-    once: false,
+    once: true,
     // offset?
     // throttle
     // debounce

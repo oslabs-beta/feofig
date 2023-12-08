@@ -27,10 +27,16 @@ const LazyLoad = ({children, threshold, placeholder, once}: LazyLoadProps) => {
         if (entry.isIntersecting) {
           image.className = children.props.className; // replace placeholder className to img className
           image.src = children.props.src; // replace placeholder src to img src
+
           if (once) observer.unobserve(image);
         } else if (!once && !entry.isIntersecting) {
-          image.className = placeholder?.props.className;
-          image.src = placeholder?.props.src;
+          if (children.props.placeholder) {
+            image.className = children.props.placeholder.props.className;
+            image.src = children.props.placeholder.props.src;
+          } else {
+            image.className = placeholder?.props.className;
+            image.src = placeholder?.props.src;
+          }
         }
       });
     };
@@ -50,6 +56,7 @@ const LazyLoad = ({children, threshold, placeholder, once}: LazyLoadProps) => {
   const returnRenderedElement = (
     children: React.ReactElement
   ): React.ReactElement => {
+    if (children.props.placeholder) return React.cloneElement(children.props.placeholder, {ref: elementRef})
     if (placeholder) return React.cloneElement(placeholder, {ref: elementRef});
     else return React.cloneElement(children, {ref: elementRef, src: null});
   };
