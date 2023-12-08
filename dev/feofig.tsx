@@ -35,7 +35,15 @@ const Fig = ({children, config, placeholder}: FigProps) => {
   const isThrottleEnabled = config && config.throttle;
   const isTestingEnabled = config && config.test;
 
+  console.log(children);
+
   const elementIsolator = (node: React.ReactNode): React.ReactNode => {
+
+    // check if the node is a Fig component
+    if (React.isValidElement(node) && node.type === Fig) {
+      return node;
+    }
+
     // preserves non-element nodes like strings
     if (!React.isValidElement(node)) return node;
 
@@ -51,7 +59,11 @@ const Fig = ({children, config, placeholder}: FigProps) => {
                 : config.lazyload?.threshold
             }
             placeholder={placeholder}
-            once={config.lazyload?.once || config.lazyload?.once === undefined ? true : false}
+            once={
+              config.lazyload?.once || config.lazyload?.once === undefined
+                ? true
+                : false
+            }
           >
             {node}
           </LazyLoad>
@@ -73,12 +85,12 @@ const Fig = ({children, config, placeholder}: FigProps) => {
     // can filter for more node types and apply other wrappers below:
 
     // if node has children, recursively transform them to fit react props children array format
-    if (node.props && node.props.children) {
-      const children = React.Children.toArray(node.props.children).map(
+    if (node.props && (node as React.ReactElement).props.children) {
+      const children = React.Children.toArray((node as React.ReactElement).props.children).map(
         elementIsolator
       );
 
-      return React.cloneElement(node, {
+      return React.cloneElement((node as React.ReactElement), {
         ...node.props,
         children: children,
       });
@@ -99,7 +111,11 @@ const Fig = ({children, config, placeholder}: FigProps) => {
   };
 
   return (
-    <>{React.Children.map(children, (child, index) => wrapper(child, index))}</>
+    <>
+      {React.Children.map(children, (child, index) => {
+        return wrapper(child, index);
+      })}
+    </>
   );
 };
 

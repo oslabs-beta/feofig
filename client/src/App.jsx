@@ -11,9 +11,7 @@ const placeholder =
 const App = () => {
   return (
     <div className='app'>
-      <Fig config={config1} placeholder={placeholder}>
         <Home />
-      </Fig>
     </div>
       
   );

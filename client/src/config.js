@@ -21,6 +21,9 @@ export const config1 = {
   // disableCustomFonts: true,
 };
 
+export const config2 = {
+}
+
 export const adaptiveLoading = {
   '3g': {},
 };
