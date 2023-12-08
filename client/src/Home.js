@@ -11,36 +11,36 @@ const placeholder = (
 
 const Home = () => {
   return (
-    // <Fig config={config2}>
-    <div className='figs-page'>
-      <header className='figs-header'>
-        <h1>The Fig Boutique</h1>
-        <p>Welcome to your one-stop shop for exquisite fig varieties!</p>
-      </header>
+    <Fig config={config2}>
+      <div className='figs-page'>
+        <header className='figs-header'>
+          <h1>The Fig Boutique</h1>
+          <p>Welcome to your one-stop shop for exquisite fig varieties!</p>
+        </header>
 
-      <Fig config={config1}>
-        <div className='figs-container'>
-          {figs.map((fig) => (
-            <div key={fig.id} className='fig-item'>
-              <img
-                src={fig.imageUrl}
-                alt={fig.name}
-                className='fig-image'
-                placeholder={placeholder}
-              />
-              <h3>{fig.name}</h3>
-              <p>{fig.description}</p>
-              <button className='buy-button'>Buy Now</button>
-            </div>
-          ))}
-        </div>
-      </Fig>
+        <Fig config={config1}>
+          <div className='figs-container'>
+            {figs.map((fig) => (
+              <div key={fig.id} className='fig-item'>
+                <img
+                  src={fig.imageUrl}
+                  alt={fig.name}
+                  className='fig-image'
+                  placeholder={placeholder}
+                />
+                <h3>{fig.name}</h3>
+                <p>{fig.description}</p>
+                <button className='buy-button'>Buy Now</button>
+              </div>
+            ))}
+          </div>
+        </Fig>
 
-      <footer className='figs-footer'>
-        <p>© 2023 FeoFig. All rights reserved.</p>
-      </footer>
-    </div>
-    // </Fig>
+        <footer className='figs-footer'>
+          <p>© 2023 FeoFig. All rights reserved.</p>
+        </footer>
+      </div>
+    </Fig>
   );
 };
 

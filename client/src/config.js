@@ -2,10 +2,9 @@ export const config1 = {
   lazyload: {
     threshold: 0.5,
     once: true,
-    // offset: '100px'
+    // offset: '100px',
     // throttle
     // debounce
-    // hello:''
   },
   debounce: {
     delay: 100,
@@ -23,6 +22,10 @@ export const config1 = {
 };
 
 export const config2 = {
+  debounce: {
+    delay: 100,
+    target: ['searchbar', 'autocomplete'], // if no array, then defaults to all
+  },
 }
 
 export const adaptiveLoading = {
