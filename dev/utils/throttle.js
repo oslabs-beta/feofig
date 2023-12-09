@@ -1,11 +1,19 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Children, cloneElement } from 'react';
 
 const Throttle = ({
-  element: Element,
+  // element: Element,
+  // onChange,
+  // value: propValue,
+  // minLength,
+  // throttleTimeout,
+  // inputRef,
+  // ...props
+
   onChange,
   value: propValue,
   minLength,
   throttleTimeout,
+  children,
   inputRef,
   ...props
 }) => {
@@ -17,7 +25,7 @@ const Throttle = ({
       setValue(propValue);
     }
   }, [propValue]);
-
+  
   const handleChange = (event) => {
     event.persist();
     const { value: newValue } = event.target;
@@ -41,14 +49,16 @@ const Throttle = ({
 
   const maybeRef = inputRef ? { ref: inputRef } : {};
 
-  return (
-    <Element
-      {...props}
-      onChange={handleChange}
-      value={value}
-      {...maybeRef}
-    />
-  );
+  const clonedChildren = Children.map(children, (child) => {
+    return cloneElement(child, {
+      ...props,
+      onChange: handleChange,
+      value: value,
+      ...maybeRef,
+    });
+  });
+
+  return <>{clonedChildren}</>;
 };
 
 export default Throttle;
