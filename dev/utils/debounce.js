@@ -131,34 +131,4 @@ const Debounce = ({
   );
 };
 
-// Debounce.propTypes = {
-//   element: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-//   type: PropTypes.string,
-//   onChange: PropTypes.func.isRequired,
-//   onKeyDown: PropTypes.func,
-//   onBlur: PropTypes.func,
-//   value: PropTypes.oneOfType([
-//     PropTypes.string,
-//     PropTypes.number
-//   ]),
-//   minLength: PropTypes.number,
-//   debounceTimeout: PropTypes.number,
-//   forceNotifyByEnter: PropTypes.bool,
-//   forceNotifyOnBlur: PropTypes.bool,
-//   inputRef: PropTypes.func
-// };
-
-// Debounce.defaultProps = {
-//   element: 'input',
-//   type: 'text',
-//   onKeyDown: undefined,
-//   onBlur: undefined,
-//   value: undefined,
-//   minLength: 0,
-//   debounceTimeout: 100,
-//   forceNotifyByEnter: true,
-//   forceNotifyOnBlur: true,
-//   inputRef: undefined
-// }
-
 export default Debounce;
