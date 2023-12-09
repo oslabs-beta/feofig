@@ -1,4 +1,3 @@
-// import React, { useState, useEffect, useRef } from 'react';  //<- original
 import React, { useState, useEffect, useRef, Children, cloneElement } from 'react';
 
 const Debounce = ({
@@ -88,8 +87,6 @@ const Debounce = ({
   });
 
   return <>{clonedChildren}</>;
-
-
 };
 
 export default Debounce;
