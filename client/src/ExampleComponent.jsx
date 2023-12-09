@@ -1,27 +1,46 @@
 import React, { useState } from 'react';
 import Debounce from '../../dev/utils/debounce';
 import Home from './Home';
+import Throttle from '../../dev/utils/throttle';
 
 const ExampleComponent = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [searchTermThrottle, setSearchTermThrottle] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
 
   return (
+    // <div>
+    //   <h1>Debounced Search Example</h1>
+    //   <Debounce
+    //     element="input"
+    //     type="text"
+    //     onChange={(event) => {setSearchTerm(event.target.value)}}
+    //     value={searchTerm}
+    //     minLength={0} // Specify the minimum length before triggering the search
+    //     debounceTimeout={1000} // Specify the debounce timeout (in milliseconds)
+    //   />
+    //   <div>
+    //     <strong>Current Search Term:</strong> {searchTerm}
+    //   </div>
+    // </div>
+
     <div>
-      <h1>Debounced Search Example</h1>
-      <Debounce
+      <h1>Throttled Search Example</h1>
+      <Throttle
         element="input"
         type="text"
-        onChange={(event) => {setSearchTerm(event.target.value)}}
-        value={searchTerm}
+        onChange={(event) => {setSearchTermThrottle(event.target.value)}}
+        value={searchTermThrottle}
         minLength={0} // Specify the minimum length before triggering the search
-        debounceTimeout={1000} // Specify the debounce timeout (in milliseconds)
+        throttleTimeout={500} // Specify the throttle timeout (in milliseconds)
       />
-      <p>Search results will be logged to the console after typing at least 3 characters.</p>
+
       <div>
-        <strong>Current Search Term:</strong> {searchTerm}
+        <strong>Current Search Term:</strong> {searchTermThrottle}
       </div>
     </div>
+
+    // select element not properly working; now showing selectedOption next to "Current Selected Option" somehow
     // <div>
     //   <h1>Debounced Select Example</h1>
     //   <Debounce
