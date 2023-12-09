@@ -1,16 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
+// import React, { useState, useEffect, useRef } from 'react';  //<- original
+import React, { useState, useEffect, useRef, Children, cloneElement } from 'react';
 
 const Debounce = ({
-  element: Element,
-  type,
   onChange,
-  onKeyDown,
-  onBlur,
   value: propValue,
   minLength,
   debounceTimeout,
-  forceNotifyByEnter,
-  forceNotifyOnBlur,
+  children,
   inputRef,
   ...props
 }) => {
@@ -64,21 +60,6 @@ const Debounce = ({
     onChange(...args);
   };
 
-  const forceNotify = (event) => {
-    if (!isDebouncing.current && debounceTimeout > 0) {
-      return;
-    }
-
-    notify.current && notify.current();
-
-    const { value: stateValue } = value;
-    if (stateValue.length >= minLength) {
-      doNotify(event);
-    } else {
-      doNotify({ ...event, target: { ...event.target, value: stateValue } });
-    }
-  };
-
   const handleChange = (event) => {
     event.persist();
     const { value: newValue } = event.target;
@@ -95,40 +76,20 @@ const Debounce = ({
     }
   };
 
-  const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
-      forceNotify(event);
-    }
-
-    if (onKeyDown) {
-      event.persist();
-      onKeyDown(event);
-    }
-  };
-
-  const handleBlur = (event) => {
-    forceNotify(event);
-
-    if (onBlur) {
-      event.persist();
-      onBlur(event);
-    }
-  };
-
-  const maybeOnKeyDown = forceNotifyByEnter ? { onKeyDown: handleKeyDown } : onKeyDown ? { onKeyDown } : {};
-  const maybeOnBlur = forceNotifyOnBlur ? { onBlur: handleBlur } : onBlur ? { onBlur } : {};
   const maybeRef = inputRef ? { ref: inputRef } : {};
 
-  return (
-    <Element
-      {...props}
-      onChange={handleChange}
-      value={value}
-      {...maybeOnKeyDown}
-      {...maybeOnBlur}
-      {...maybeRef}
-    />
-  );
+  const clonedChildren = Children.map(children, (child) => {
+    return cloneElement(child, {
+      ...props,
+      onChange: handleChange,
+      value: value,
+      ...maybeRef,
+    });
+  });
+
+  return <>{clonedChildren}</>;
+
+
 };
 
 export default Debounce;
