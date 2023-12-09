@@ -8,37 +8,53 @@ const ExampleComponent = () => {
   const [searchTermThrottle, setSearchTermThrottle] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
 
-  return (
-    // <div>
-    //   <h1>Debounced Search Example</h1>
-    //   <Debounce
-    //     element="input"
-    //     type="text"
-    //     onChange={(event) => {setSearchTerm(event.target.value)}}
-    //     value={searchTerm}
-    //     minLength={0} // Specify the minimum length before triggering the search
-    //     debounceTimeout={1000} // Specify the debounce timeout (in milliseconds)
-    //   />
-    //   <div>
-    //     <strong>Current Search Term:</strong> {searchTerm}
-    //   </div>
-    // </div>
+  const [buttonClickCount, setButtonClickCount] = useState(0);
 
+  const handleButtonClick = () => {
+    setButtonClickCount((prevCount) => prevCount + 1);
+  };
+
+  return (
     <div>
-      <h1>Throttled Search Example</h1>
-      <Throttle
+      <h1>Debounced Search Example</h1>
+      {/* <Debounce
         element="input"
         type="text"
-        onChange={(event) => {setSearchTermThrottle(event.target.value)}}
-        value={searchTermThrottle}
-        minLength={0} // Specify the minimum length before triggering the search
-        throttleTimeout={500} // Specify the throttle timeout (in milliseconds)
-      />
-
+        onChange={(event) => {setSearchTerm(event.target.value)}}
+        value={searchTerm}
+        minLength={3} // Specify the minimum length before triggering the search
+        debounceTimeout={1000} // Specify the debounce timeout (in milliseconds)
+      /> */}
+      <Debounce
+        onChange={(event) => { setSearchTerm(event.target.value);}}
+        minLength={3}
+        debounceTimeout={1000}
+      >
+        <div>
+          {/* <textarea /> */}
+          <input type='text' />
+        </div>
+      </Debounce>
       <div>
-        <strong>Current Search Term:</strong> {searchTermThrottle}
+        <strong>Current Search Term:</strong> {searchTerm}
       </div>
+
     </div>
+
+    // <div>
+    //   <h1>Throttled Search Example</h1>
+    //   <Throttle
+    //     element="input"
+    //     type="text"
+    //     onChange={(event) => {setSearchTermThrottle(event.target.value)}}
+    //     value={searchTermThrottle}
+    //     minLength={0} // Specify the minimum length before triggering the search
+    //     throttleTimeout={500} // Specify the throttle timeout (in milliseconds)
+    //   />
+    //   <div>
+    //     <strong>Current Search Term:</strong> {searchTermThrottle}
+    //   </div>
+    // </div>
 
     // select element not properly working; now showing selectedOption next to "Current Selected Option" somehow
     // <div>
