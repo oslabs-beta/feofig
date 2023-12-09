@@ -1,3 +1,5 @@
+import { ChangeEvent, ReactNode } from "react";
+
 export type Config = {
   lazyload?: LazyLoadConfig;
   throttle?: ThrottleConfig; // not added
@@ -42,5 +44,14 @@ export type DebounceProps = {
   minLength?: number;
   debounceTimeout?: number;
   children: React.ReactNode;
+  inputRef?: React.RefObject<HTMLInputElement>;
+}
+
+export type ThrottleProps = {
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
+  minLength: number;
+  throttleTimeout: number;
+  children: ReactNode;
   inputRef?: React.RefObject<HTMLInputElement>;
 }
