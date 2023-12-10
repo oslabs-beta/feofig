@@ -1,4 +1,4 @@
-export const config1 = {
+export const lazyLoadConfig = {
   lazyload: {
     threshold: 0.5,
     once: true,
@@ -7,12 +7,14 @@ export const config1 = {
     // debounce
   },
   debounce: {
-    delay: 100,
-    target: ['searchbar', 'autocomplete'], // if no array, then defaults to all
+    delay: 1000,
+    minLength: 3,
+    // target: ['searchbar', 'autocomplete'], // if no array, then defaults to all
   },
   throttle: {
     delay: 100,
-    target: ['searchbar', 'autocomplete'], // if no array, then defaults to all
+    minLength: 3,
+    // target: ['searchbar', 'autocomplete'], // if no array, then defaults to all
   },
   test: true, // tentative
 
@@ -21,10 +23,19 @@ export const config1 = {
   // disableCustomFonts: true,
 };
 
-export const config2 = {
+export const debounceConfig = {
   debounce: {
-    delay: 100,
-    target: ['searchbar', 'autocomplete'], // if no array, then defaults to all
+    delay: 1000,
+    minLength: 3,
+    // target: ['searchbar', 'autocomplete'], // if no array, then defaults to all
+  },
+}
+
+export const throttleConfig = {
+  throttle: {
+    delay: 1000,
+    minLength: 3,
+    // target: ['searchbar', 'autocomplete'], // if no array, then defaults to all
   },
 }
 

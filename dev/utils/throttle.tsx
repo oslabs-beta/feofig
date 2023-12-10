@@ -42,16 +42,29 @@ const Throttle = ({
 
   const maybeRef = inputRef ? { ref: inputRef } : {};
 
-  const clonedChildren = Children.map(children, (child) => {
-    return cloneElement(child as ReactElement, {
+  // const clonedChildren = Children.map(children, (child) => {
+  //   return cloneElement(child as ReactElement, {
+  //     ...props,
+  //     onChange: handleChange,
+  //     value: value,
+  //     ...maybeRef,
+  //   });
+  // });
+
+  // return <>{clonedChildren}</>;
+
+  const returnRenderedElement = (children: React.ReactElement) => {
+    return React.cloneElement(children as React.ReactElement, {
       ...props,
       onChange: handleChange,
-      value: value,
+      value,
       ...maybeRef,
     });
-  });
+  };
 
-  return <>{clonedChildren}</>;
+  const newReactElement = returnRenderedElement(children as React.ReactElement);
+
+  return newReactElement;
 };
 
 export default Throttle;

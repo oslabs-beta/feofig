@@ -1,11 +1,19 @@
-import React, { useState, useEffect, useRef, Children, cloneElement, ChangeEvent } from 'react';
-import { DebounceProps } from '../types/types';
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  Children,
+  cloneElement,
+  ChangeEvent,
+} from 'react';
+import {DebounceProps} from '../types/types';
 
 const Debounce = ({
   onChange,
   value: propValue,
   minLength = 0,
-  debounceTimeout = 100,
+  // there is a bug when timeout is set to 100, idk why yet so adding 1 ms if user sets it to 100
+  debounceTimeout = 101,
   children,
   inputRef,
   ...props
@@ -15,6 +23,8 @@ const Debounce = ({
   );
   const isDebouncing = useRef<boolean>(false);
   const notify = useRef<((...args: any[]) => void) | null>(null);
+
+  console.log(children);
 
   // from https://levelup.gitconnected.com/debounce-from-scratch-8616c8209b54
   const debounce = (func: (...args: any[]) => void, wait: number) => {
@@ -32,10 +42,13 @@ const Debounce = ({
     } else if (timeout === 0) {
       notify.current = doNotify;
     } else {
-      const debouncedChangeFunc = debounce((event: ChangeEvent<HTMLInputElement>) => {
-        isDebouncing.current = false;
-        doNotify(event);
-      }, timeout);
+      const debouncedChangeFunc = debounce(
+        (event: ChangeEvent<HTMLInputElement>) => {
+          isDebouncing.current = false;
+          doNotify(event);
+        },
+        timeout
+      );
 
       notify.current = (event: ChangeEvent<HTMLInputElement>) => {
         isDebouncing.current = true;
@@ -53,6 +66,7 @@ const Debounce = ({
       setValue(propValue);
     }
 
+    // tested removing this to fix 100 bug but didn't change anything
     if (debounceTimeout !== undefined && debounceTimeout !== 100) {
       createNotifier(debounceTimeout);
     }
@@ -64,7 +78,7 @@ const Debounce = ({
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     event.persist();
-    const { value: newValue } = event.target;
+    const {value: newValue} = event.target;
 
     setValue(newValue);
 
@@ -74,22 +88,35 @@ const Debounce = ({
     }
 
     if (value.length > newValue.length) {
-      notify.current?.({ ...event, target: { ...event.target, value: '' } });
+      notify.current?.({...event, target: {...event.target, value: ''}});
     }
   };
 
-  const maybeRef = inputRef ? { ref: inputRef } : {};
+  const maybeRef = inputRef ? {ref: inputRef} : {};
 
-  const clonedChildren = Children.map(children, (child) => {
-    return cloneElement(child as React.ReactElement, {
+  // const clonedChildren = Children.map(children, (child) => {
+  //   return cloneElement(child as React.ReactElement, {
+  //     ...props,
+  //     onChange: handleChange,
+  //     value,
+  //     ...maybeRef,
+  //   });
+  // });
+
+  // return <>{clonedChildren}</>;
+
+  const returnRenderedElement = (children: React.ReactElement) => {
+    return React.cloneElement(children as React.ReactElement, {
       ...props,
       onChange: handleChange,
       value,
       ...maybeRef,
     });
-  });
+  };
 
-  return <>{clonedChildren}</>;
+  const newReactElement = returnRenderedElement(children as React.ReactElement);
+
+  return newReactElement;
 };
 
 export default Debounce;

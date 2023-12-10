@@ -1,5 +1,7 @@
 import React from 'react';
 import LazyLoad from './utils/lazyload';
+import Debounce from './utils/debounce';
+import Throttle from './utils/throttle';
 import validateConfigs from './types/validateConfig';
 import {FigProps} from './types/types';
 
@@ -14,11 +16,14 @@ const Fig = ({children, config, placeholder}: FigProps) => {
   const isTestingEnabled = config && config.test;
 
   // recursively iterates through elements to find desired type to wrap
+  // worried about how this will affect performance especially with deeply nested component trees. maybe memoization or a hook to trigger selectively
   const elementIsolator = (node: React.ReactNode): React.ReactNode => {
     // check if the node is a Fig component, if so then ignore Fig
     if (React.isValidElement(node) && node.type === Fig) {
       return node;
     }
+
+    // might need to add a check here for other custom non-native wrappers
 
     // preserves non-element nodes like strings
     if (!React.isValidElement(node)) return node;
@@ -40,12 +45,51 @@ const Fig = ({children, config, placeholder}: FigProps) => {
       }
     }
 
-    // DEBOUNCE AND THROTTLING LOGIC HERE
-    if (isDebounceEnabled || isThrottleEnabled) {
-      // if an array of classes is provided for the target,
-      if (typeof config.debounce?.target || typeof config.throttle?.target) {
-        // add debounce/throttle to specified classes in the target and return
-      } else if (node.type === 'btn') {
+    // still need to filter by config.target
+    if (isDebounceEnabled) {
+      if (Array.isArray(config.debounce?.target)) {
+      } else if ((node as React.ReactElement).type === 'input') {
+        return (
+          <>
+            <Debounce
+              onChange={(node as React.ReactElement).props.onChange}
+              minLength={config.debounce?.minLength || 0}
+              // there is a bug when delay is set to 100, idk why yet so adding 1 ms if user sets it to 100
+              debounceTimeout={
+                config.debounce?.delay === undefined ||
+                config.debounce?.delay === 100
+                  ? 101
+                  : config.debounce?.delay
+              }
+            >
+              {node}
+            </Debounce>
+          </>
+        );
+        // default if array is not provided
+        // add debounceing/throttling depending on which is enabled and return
+      } // maybe account for other handlers besides button
+    }
+
+    // still need to filter by config.target
+    if (isThrottleEnabled) {
+      if (Array.isArray(config.throttle?.target)) {
+      } else if ((node as React.ReactElement).type === 'input') {
+        return (
+          <>
+            <Throttle
+              onChange={(node as React.ReactElement).props.onChange}
+              minLength={config.throttle?.minLength || 0}
+              throttleTimeout={
+                config.throttle?.delay === undefined
+                  ? 100
+                  : config.throttle?.delay
+              }
+            >
+              {node}
+            </Throttle>
+          </>
+        );
         // default if array is not provided
         // add debounceing/throttling depending on which is enabled and return
       } // maybe account for other handlers besides button

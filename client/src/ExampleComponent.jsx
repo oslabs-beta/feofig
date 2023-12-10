@@ -1,17 +1,40 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import Debounce from '../../dev/utils/debounce.tsx';
 import Home from './Home';
 import Throttle from '../../dev/utils/throttle.tsx';
+import Fig from '../../dev/feofig';
+import {config1, config2, debounceConfig, throttleConfig} from './config';
 
 const ExampleComponent = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [figSearchTerm, setFigSearchTerm] = useState('');
+  const [figSearchTermThrottle, setFigSearchTermThrottle] = useState('');
   const [searchTermThrottle, setSearchTermThrottle] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
 
   return (
     <>
-      <div>
-        <h1>Debounced Search Example</h1>
+      <Fig config={debounceConfig}>
+        <div className={'figdebounceInput'}>
+          <h1>Fig Debounced Search Example</h1>
+          <div>
+            {/* <textarea /> */}
+            <input
+              type='text'
+              onChange={(event) => {
+                setFigSearchTerm(event.target.value);
+              }}
+            />{' '}
+            {/* <- input element wrapped with Debounce */}
+          </div>
+          <div>
+            <strong>Current Search Term:</strong> {figSearchTerm}
+          </div>
+        </div>
+      </Fig>
+
+      <div className={'debounceInput'}>
+        <h1>Non-Fig Debounced Search Example</h1>
         {/* <Debounce
           element="input"
           type="text"
@@ -21,7 +44,9 @@ const ExampleComponent = () => {
           debounceTimeout={1000} // Specify the debounce timeout (in milliseconds)
         /> */}
         <Debounce
-          onChange={(event) => { setSearchTerm(event.target.value);}}
+          onChange={(event) => {
+            setSearchTerm(event.target.value);
+          }}
           minLength={3}
           debounceTimeout={1000}
         >
@@ -35,8 +60,25 @@ const ExampleComponent = () => {
         </div>
       </div>
 
-      <div>
-        <h1>Throttled Search Example</h1>
+      <Fig config={throttleConfig}>
+        <div className={'figthrottleInput'}>
+          <h1>Fig Throttled Search Example</h1>
+          <div>
+            <input
+              type='text'
+              onChange={(event) => {
+                setFigSearchTermThrottle(event.target.value);
+              }}
+            />{' '}
+          </div>
+          <div>
+            <strong>Current Search Term:</strong> {figSearchTermThrottle}
+          </div>
+        </div>
+      </Fig>
+
+      <div className={'throttleInput'}>
+        <h1>Non-Fig Throttled Search Example</h1>
         {/* <Throttle
           element="input"
           type="text"
@@ -46,7 +88,9 @@ const ExampleComponent = () => {
           throttleTimeout={500} // Specify the throttle timeout (in milliseconds)
         /> */}
         <Throttle
-          onChange={(event) => { setSearchTermThrottle(event.target.value);}}
+          onChange={(event) => {
+            setSearchTermThrottle(event.target.value);
+          }}
           minLength={0}
           throttleTimeout={500}
         >
