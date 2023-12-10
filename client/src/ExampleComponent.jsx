@@ -12,6 +12,8 @@ const ExampleComponent = () => {
   const [searchTermThrottle, setSearchTermThrottle] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
 
+  console.log('exampleComponent re-renders')
+  
   return (
     <>
       <Fig config={debounceConfig}>
@@ -48,7 +50,7 @@ const ExampleComponent = () => {
             setSearchTerm(event.target.value);
           }}
           minLength={3}
-          debounceTimeout={1000}
+          debounceTimeout={100}
         >
           <div>
             {/* <textarea /> */}

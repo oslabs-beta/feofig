@@ -33,7 +33,7 @@ export const debounceConfig = {
 
 export const throttleConfig = {
   throttle: {
-    delay: 1000,
+    delay: 100,
     minLength: 3,
     // target: ['searchbar', 'autocomplete'], // if no array, then defaults to all
   },

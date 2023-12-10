@@ -24,8 +24,6 @@ const Debounce = ({
   const isDebouncing = useRef<boolean>(false);
   const notify = useRef<((...args: any[]) => void) | null>(null);
 
-  console.log(children);
-
   // from https://levelup.gitconnected.com/debounce-from-scratch-8616c8209b54
   const debounce = (func: (...args: any[]) => void, wait: number) => {
     let timerId: NodeJS.Timeout;
@@ -67,9 +65,9 @@ const Debounce = ({
     }
 
     // tested removing this to fix 100 bug but didn't change anything
-    if (debounceTimeout !== undefined && debounceTimeout !== 100) {
+    // if (debounceTimeout !== undefined && debounceTimeout !== 100) {
       createNotifier(debounceTimeout);
-    }
+    // }
   }, [propValue, debounceTimeout]);
 
   const doNotify = (...args: any[]) => {
