@@ -13,7 +13,7 @@ const ExampleComponent = () => {
   const [selectedOption, setSelectedOption] = useState('');
 
   console.log('exampleComponent re-renders')
-  
+
   return (
     <>
       <Fig config={debounceConfig}>

@@ -12,7 +12,7 @@ const placeholder = (
 
 const Home = () => {
   return (
-    // <Fig config={lazyLoadConfig}>
+    <Fig config={lazyLoadConfig}>
     <div className='figs-page'>
       <header className='figs-header'>
         <h1>The Fig Boutique</h1>
@@ -41,7 +41,7 @@ const Home = () => {
         <p>© 2023 FeoFig. All rights reserved.</p>
       </footer>
     </div>
-    // </Fig>
+    </Fig>
   );
 };
 
