@@ -12,13 +12,15 @@ export type LazyLoadConfig = {
 };
 
 export type ThrottleConfig = {
-  delay: number;
+  delay?: number;
   target?: string[];
+  minLength?: number;
 };
 
 export type DebounceConfig = {
-  delay: number;
+  delay?: number;
   target?: string[];
+  minLength?: number;
 };
 
 export type FigProps = {
@@ -35,3 +37,21 @@ export type LazyLoadProps = {
   once?: boolean;
   offset?: string;
 };
+
+export type DebounceProps = {
+  onChange: (...args: any[]) => void;
+  value?: string | null;
+  minLength?: number;
+  debounceTimeout?: number;
+  children: React.ReactNode;
+  inputRef?: React.RefObject<HTMLInputElement>;
+}
+
+export type ThrottleProps = {
+  onChange: (...args: any[]) => void;
+  value?: string;
+  minLength: number;
+  throttleTimeout: number;
+  children: React.ReactNode;
+  inputRef?: React.RefObject<HTMLInputElement>;
+}
