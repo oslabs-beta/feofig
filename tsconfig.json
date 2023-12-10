@@ -15,6 +15,6 @@
     "declaration": true,
     "sourceMap": true, // for debugging, disable for production
   },
-  "include": ["**/*.ts", "**/*.tsx", "dev/utils/lazyload.tsx"],
+  "include": ["**/*.ts", "**/*.tsx", "dev/utils/lazyload.tsx", "./index.d.ts"],
   "exclude": ["node_modules", "dist", "./package"]
 }
