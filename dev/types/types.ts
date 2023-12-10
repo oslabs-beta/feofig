@@ -12,13 +12,15 @@ export type LazyLoadConfig = {
 };
 
 export type ThrottleConfig = {
-  delay: number;
+  delay?: number;
   target?: string[];
+  minLength?: number;
 };
 
 export type DebounceConfig = {
-  delay: number;
+  delay?: number;
   target?: string[];
+  minLength?: number;
 };
 
 export type FigProps = {
