@@ -13,7 +13,7 @@
     "noImplicitAny": true,
     "noUncheckedIndexedAccess": true,
     "declaration": true,
-    // "sourceMap": true, // for debugging, disable for production
+    "sourceMap": true, // for debugging, disable for production
   },
   "include": ["**/*.ts", "**/*.tsx", "dev/utils/lazyload.tsx"],
   "exclude": ["node_modules", "dist", "./package"]
