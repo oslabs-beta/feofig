@@ -15,8 +15,7 @@ export const lazyLoadConfig = {
     delay: 100,
     minLength: 3,
     // target: ['searchbar', 'autocomplete'], // if no array, then defaults to all
-  },
-  test: true, // tentative
+  }
 
   // pre-fetching: true,
   // disableCSSanimations : true,

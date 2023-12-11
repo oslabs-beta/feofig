@@ -18,7 +18,6 @@ const Fig = ({children, config, placeholder}: FigProps) => {
   const isLazyLoadEnabled = config && config.lazyload;
   const isDebounceEnabled = config && config.debounce;
   const isThrottleEnabled = config && config.throttle;
-  const isTestingEnabled = config && config.test;
 
 
   // Memoize the elementIsolator function to prevent unnecessary recalculations
