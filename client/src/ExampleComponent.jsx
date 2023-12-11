@@ -3,7 +3,7 @@ import Debounce from '../../dev/utils/debounce.tsx';
 import Home from './Home';
 import Throttle from '../../dev/utils/throttle.tsx';
 import Fig from '../../dev/feofig';
-import {config1, config2, debounceConfig, throttleConfig} from './config';
+import {config1, config2, debounceConfig, debounceConfig2, throttleConfig} from './config';
 
 const ExampleComponent = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -34,7 +34,23 @@ const ExampleComponent = () => {
           </div>
         </div>
       </Fig>
-
+      <Fig config={debounceConfig2}>
+        <div className='figdebounceSelect'>
+          <h1>Debounced Select Example</h1>
+          <select
+            onChange={(event) => setSelectedOption(event.target.value)}
+            value={selectedOption}
+          >
+            <option value="">Select an option</option>
+            <option value="First option">Option 1</option>
+            <option value="Second option">Option 2</option>
+            <option value="Third option">Option 3</option>
+          </select>
+          <div>
+            <strong>Current Selected Option:</strong> {selectedOption}
+          </div>
+        </div>
+      </Fig>
       <div className={'debounceInput'}>
         <h1>Non-Fig Debounced Search Example</h1>
         {/* <Debounce
