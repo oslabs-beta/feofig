@@ -1,10 +1,15 @@
-const puppeteer = require('puppeteer');
+#!/usr/bin/env node
 
-const APP = `http://localhost:${process.env.PORT || 8080}/`;
-const timeout = 10000;
+const puppeteer = require('puppeteer');
+const yargs = require('yargs');
+
+let { port } = yargs.argv;
+const includedNetworksArray = yargs.argv._;
+
+const APP = `http://localhost:${port || 8080}/`;
 
 const networkConditions = {
-  developer: {
+  dev: {
     offline: false,
     latency: -1,
     downloadThroughput: -1, // disables download throttling
@@ -34,7 +39,7 @@ const networkConditions = {
   },
 };
 
-async function run(networkCondition, networkString) {
+async function run(networkCondition, networkString, timeout) {
   // Start headless chrome browser
   const browser = await puppeteer.launch({
     headless: 'new',
@@ -42,7 +47,7 @@ async function run(networkCondition, networkString) {
 
   // Create a new page in the browser
   const page = await browser.newPage();
-  // Disable cache for accurate load times
+  // Disable cache for more accurate load times
   await page.setCacheEnabled(false);
 
   // Create a Chrome DevTools Protocol session to talk to the page.
@@ -96,20 +101,30 @@ async function run(networkCondition, networkString) {
 }
 
 async function benchmark() {
+  let timeout = 3000;
+
   console.log('Starting benchmark. This may take a few seconds. Please wait.');
-  await run(networkConditions.developer, 'current network');
-  await run(networkConditions['4g'], '4g');
-  await run(networkConditions['3g'], '3g');
-  await run(networkConditions['2g'], '2g');
-  
+
+  await run(networkConditions.dev, 'current network', timeout);
+
+  if (includedNetworksArray.includes('4g'))
+    await run(networkConditions['4g'], '4g', timeout);
+  if (includedNetworksArray.includes('3g')) {
+    timeout = 5000;
+    await run(networkConditions['3g'], '3g', timeout);
+  }
+  if (includedNetworksArray.includes('2g')) {
+    timeout = 10000;
+    await run(networkConditions['2g'], '2g', timeout);
+  }
+
   setTimeout(() => {
     console.log(
       '==============================================================='
     );
     console.log('Benchmark completed!');
-    process.exit()
+    process.exit();
   }, timeout);
-
 }
 
 benchmark();
