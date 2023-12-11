@@ -2,7 +2,6 @@ export type Config = {
   lazyload?: LazyLoadConfig;
   throttle?: ThrottleConfig; // not added
   debounce?: DebounceConfig; // not added
-  test?: boolean; // tentative and not added
 };
 
 export type LazyLoadConfig = {

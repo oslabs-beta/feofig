@@ -15,7 +15,6 @@ const Fig = ({children, config, placeholder}: FigProps) => {
   const isLazyLoadEnabled = config && config.lazyload;
   const isDebounceEnabled = config && config.debounce;
   const isThrottleEnabled = config && config.throttle;
-  const isTestingEnabled = config && config.test;
 
   // recursively iterates through elements to find desired type to wrap
   // worried about how this will affect performance especially with deeply nested component trees. maybe memoization or a hook to trigger selectively
