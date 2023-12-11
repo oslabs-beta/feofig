@@ -58,7 +58,9 @@ const Fig = ({children, config, placeholder}: FigProps) => {
       // still need to filter by config.target
       if (isDebounceEnabled) {
         if (Array.isArray(config.debounce?.target)) {
-        } else if ((node as React.ReactElement).type === 'input') {
+        } else if ((node as React.ReactElement).type === 'input' 
+        || (node as React.ReactElement).type === 'textarea'
+        || (node as React.ReactElement).type === 'select') {
           return (
             <>
               <Debounce
