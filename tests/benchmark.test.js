@@ -47,6 +47,7 @@ async function run(networkCondition, networkString, timeout) {
 
   // Create a new page in the browser
   const page = await browser.newPage();
+  
   // Disable cache for more accurate load times
   await page.setCacheEnabled(false);
 
