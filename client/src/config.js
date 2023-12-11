@@ -6,16 +6,16 @@ export const lazyLoadConfig = {
     // throttle
     // debounce
   },
-  debounce: {
-    delay: 1000,
-    minLength: 3,
-    // target: ['searchbar', 'autocomplete'], // if no array, then defaults to all
-  },
-  throttle: {
-    delay: 100,
-    minLength: 3,
-    // target: ['searchbar', 'autocomplete'], // if no array, then defaults to all
-  }
+  // debounce: {
+  //   delay: 1000,
+  //   minLength: 3,
+  //   // target: ['searchbar', 'autocomplete'], // if no array, then defaults to all
+  // },
+  // throttle: {
+  //   delay: 100,
+  //   minLength: 3,
+  //   // target: ['searchbar', 'autocomplete'], // if no array, then defaults to all
+  // }
 
   // pre-fetching: true,
   // disableCSSanimations : true,
