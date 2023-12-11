@@ -4,7 +4,7 @@ const path = require('path');
 const entry = path.resolve(__dirname, './client/src/index.js');
 
 const output = {
-  path: path.resolve(__dirname, 'dist'),
+  path: path.resolve(__dirname, 'client','dist'),
   filename: 'bundle.js',
 };
 
@@ -16,7 +16,7 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?/,
-        exclude: /node_modules/,
+        // exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
@@ -26,6 +26,11 @@ module.exports = {
             ],
           },
         },
+      },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        // exclude: /node_modules/,
       },
       {
         test: /\.s[ac]ss$/i,
@@ -39,11 +44,15 @@ module.exports = {
         ],
       },
       {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
         test: /\.html$/i,
         loader: 'html-loader',
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
+        test: /\.(png|jpg|webp|gif|svg|mp4)$/,
         use: [
           {
             loader: 'file-loader',
@@ -59,7 +68,7 @@ module.exports = {
   ],
   devServer: {
     static: {
-      directory: path.join(__dirname, 'dist'),
+      directory: path.join(__dirname, 'client', 'dist'),
       publicPath: '/',
     },
     host: 'localhost',
@@ -72,7 +81,7 @@ module.exports = {
   },
   resolve: {
     // Enable importing JS / JSX files without specifying their extension
-    extensions: ['.js', '.jsx'],
+    extensions: ['.jsx', '.js', '.tsx', '.ts'],
     fallback: {
       fs: false,
       async_hooks: false,
