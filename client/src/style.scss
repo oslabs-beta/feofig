@@ -85,3 +85,72 @@ body {
   margin-top: 30px;
   font-size: 1em;
 }
+
+
+
+
+
+/* ANIMATION */
+
+/* ANIMATION */
+.animate {
+  -webkit-animation-name: squarePath;
+  animation-name: squarePath;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite; /* Loop the animation */
+  animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes squarePath {
+  0%,
+  100% {
+    -webkit-transform: translate(-100%, -100%);
+    transform: translate(-100%, -100%);
+  }
+  25% {
+    -webkit-transform: translate(100%, -100%);
+    transform: translate(100%, -100%);
+  }
+  50% {
+    -webkit-transform: translate(100%, 100%);
+    transform: translate(100%, 100%);
+  }
+  75% {
+    -webkit-transform: translate(-100%, 100%);
+    transform: translate(-100%, 100%);
+  }
+}
+
+@keyframes squarePath {
+  0%,
+  100% {
+    -webkit-transform: translate(-100%, -100%);
+    transform: translate(-100%, -100%);
+  }
+  25% {
+    -webkit-transform: translate(100%, -100%);
+    transform: translate(100%, -100%);
+  }
+  50% {
+    -webkit-transform: translate(100%, 100%);
+    transform: translate(100%, 100%);
+  }
+  75% {
+    -webkit-transform: translate(-100%, 100%);
+    transform: translate(-100%, 100%);
+  }
+}
+
+/* HTML: */
+
+.animate {
+  margin: 250px;
+  background-color: pink;
+  border-radius: 50%;
+  height: 100px;
+  transform: translate(-100%, -100%);
+  width: 100px;
+  box-shadow: 0 0 0 2px white, /* White border */ 0 0 0 6px purple,
+    /* Purple border */ inset 0 0 0 10px pink; /* Pink inside */
+}
