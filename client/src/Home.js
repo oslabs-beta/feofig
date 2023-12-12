@@ -5,6 +5,7 @@ import image from '../public/placeholder.webp';
 import figs from './FigList.js';
 import './style.scss';
 import ExampleComponent from './ExampleComponent.jsx';
+import AnimateComponent from './AnimateComponent.jsx';
 
 const placeholder = (
   <img src={image} alt='figs coming soon' className='fig-image' />
@@ -18,6 +19,7 @@ const Home = () => {
         <h1>The Fig Boutique</h1>
         <p>Welcome to your one-stop shop for exquisite fig varieties!</p>
       </header>
+      <AnimateComponent />
       <ExampleComponent />
       {/* <Fig config={lazyLoadConfig}> */}
       <div className='figs-container'>

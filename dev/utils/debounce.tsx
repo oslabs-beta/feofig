@@ -2,7 +2,6 @@ import React, {
   useState,
   useEffect,
   useRef,
-  Children,
   cloneElement,
   ChangeEvent,
 } from 'react';
@@ -104,7 +103,7 @@ const Debounce = ({
   // return <>{clonedChildren}</>;
 
   const returnRenderedElement = (children: React.ReactElement) => {
-    return React.cloneElement(children as React.ReactElement, {
+    return cloneElement(children as React.ReactElement, {
       ...props,
       onChange: handleChange,
       value,

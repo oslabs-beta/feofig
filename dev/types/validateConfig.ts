@@ -9,7 +9,7 @@ const validateConfigs = (config: Config) => {
     throw new Error('Configuration file must be an object!');
 
   // checks for additional unexpected properties
-  const allowedProps = ['lazyload', 'debounce', 'throttle'];
+  const allowedProps = ['lazyload', 'debounce', 'throttle', "animationDisable"];
   const actualProps = Object.keys(config);
   const invalidProps = actualProps.filter(
     (prop) => !allowedProps.includes(prop)
