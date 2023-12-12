@@ -33,6 +33,25 @@ const ExampleComponent = () => {
             <strong>Current Search Term:</strong> {figSearchTerm}
           </div>
         </div>
+        <div>
+          <h1>Debounced Form Example</h1>
+          <form onSubmit={(event) => {
+                event.preventDefault();
+                console.log('Saved');
+                // Add your autosave logic here
+              }}>
+            <label>
+              Notes:<br />
+              <textarea
+                onChange={(event) => {
+                  console.log('Contents saved:', event.target.value)
+                }}
+              />
+            </label>
+            <br />
+            <button type="save">Save</button>
+          </form>
+        </div>
       </Fig>
       <Fig config={debounceConfig2}>
         <div className='figdebounceSelect'>
@@ -122,26 +141,6 @@ const ExampleComponent = () => {
         </div>
       </div>
     </>
-
-    // select element not properly working; not showing selectedOption next to "Current Selected Option" somehow
-    // <div>
-    //   <h1>Debounced Select Example</h1>
-    //   <Debounce
-    //     element="select"  // Change the element prop to 'select'
-    //     onChange={(event) => setSelectedOption(event.target.value)}
-    //     value={selectedOption}
-    //     debounceTimeout={1000}
-    //   >
-    //     <option value="">Select an option</option>
-    //     <option value="option1">Option 1</option>
-    //     <option value="option2">Option 2</option>
-    //     <option value="option3">Option 3</option>
-    //   </Debounce>
-    //   <p>Selected option will be logged to the console after a debounce delay.</p>
-    //   <div>
-    //     <strong>Current Selected Option:</strong> {selectedOption}
-    //   </div>
-    // </div>
   );
 };
 
