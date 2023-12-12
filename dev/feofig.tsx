@@ -60,7 +60,9 @@ const Fig = ({children, config, placeholder}: FigProps) => {
       // still need to filter by config.target
       if (isDebounceEnabled) {
         if (Array.isArray(config.debounce?.target)) {
-        } else if ((node as React.ReactElement).type === 'input') {
+        } else if ((node as React.ReactElement).type === 'input' 
+        || (node as React.ReactElement).type === 'textarea'
+        || (node as React.ReactElement).type === 'select') {
           return (
             <>
               <Debounce
@@ -81,6 +83,19 @@ const Fig = ({children, config, placeholder}: FigProps) => {
           // default if array is not provided
           // add debounceing/throttling depending on which is enabled and return
         } // maybe account for other handlers besides button
+        else if((node as React.ReactElement).type === 'form') {
+          return (
+            <form
+              {...(node as React.ReactElement).props}
+            >
+              {React.Children.map(
+                (node as React.ReactElement).props.children,
+                (child: React.ReactElement) =>
+                  memoizedElementIsolator(child) || child
+              )}
+            </form>
+          );
+        }
       }
 
       // still need to filter by config.target
