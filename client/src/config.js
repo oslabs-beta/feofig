@@ -43,7 +43,7 @@ export const adaptiveLoading = {
 };
 
 
-export const AnimationDisableConfig = {
+export const animationDisableConfig = {
   animationDisable: {
     threshold: 0.5,
     offset: "0px",

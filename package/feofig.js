@@ -3,6 +3,8 @@ import LazyLoad from './utils/lazyload';
 import Debounce from './utils/debounce';
 import Throttle from './utils/throttle';
 import validateConfigs from './types/validateConfig';
+import AnimationDisable from './utils/animationdisable';
+('');
 const Fig = ({ children, config, placeholder }) => {
     const [transformedChildren, setTransformedChildren] = useState(null);
     const [finishedTransforming, setFinishedTransforming] = useState(false);
@@ -14,19 +16,17 @@ const Fig = ({ children, config, placeholder }) => {
     const isLazyLoadEnabled = config && config.lazyload;
     const isDebounceEnabled = config && config.debounce;
     const isThrottleEnabled = config && config.throttle;
-    const isTestingEnabled = config && config.test;
+    const isAnimationDisableEnabled = config && config.animationDisable;
     // Memoize the elementIsolator function to prevent unnecessary recalculations
     const memoizedElementIsolator = useMemo(() => {
-        console.log('memoized');
         // recursively iterates through elements to find desired type to wrap
         // worried about how this will affect performance especially with deeply nested component trees. maybe memoization or a hook to trigger selectively
         const elementIsolator = (node) => {
-            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
+            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q;
             // check if the node is a Fig component, if so then ignore Fig
             if (React.isValidElement(node) && node.type === Fig) {
                 return node;
             }
-            console.log('elementIsolator triggered');
             // might need to add a check here for other custom non-native wrappers
             // preserves non-element nodes like strings
             if (!React.isValidElement(node))
@@ -66,6 +66,15 @@ const Fig = ({ children, config, placeholder }) => {
                     // add debounceing/throttling depending on which is enabled and return
                 } // maybe account for other handlers besides button
             }
+            if (isAnimationDisableEnabled) {
+                // on the Config, developer will designate which css classes to disable by adding css class names to the "classes" property on animationDisable
+                // conditional is checking if any of the designated classes are applied to the node
+                if ((_o = config.animationDisable) === null || _o === void 0 ? void 0 : _o.classes.includes(node.props.className)) {
+                    console.log(node);
+                    return (React.createElement(React.Fragment, null,
+                        React.createElement(AnimationDisable, { threshold: (_p = config.animationDisable) === null || _p === void 0 ? void 0 : _p.threshold, offset: (_q = config.animationDisable) === null || _q === void 0 ? void 0 : _q.offset }, node)));
+                }
+            }
             // can filter for more node types and apply other wrappers below:
             // if node has children, recursively transform them to fit react props children array format
             if (node.props && node.props.children) {
@@ -82,7 +91,7 @@ const Fig = ({ children, config, placeholder }) => {
             return child;
         }
         // calls recursive function, add more checks here if necessary
-        if (isLazyLoadEnabled || isDebounceEnabled || isThrottleEnabled) {
+        if (isLazyLoadEnabled || isDebounceEnabled || isThrottleEnabled || isAnimationDisableEnabled) {
             return memoizedElementIsolator(child) || child;
         }
     };

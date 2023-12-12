@@ -12,11 +12,9 @@ const ExampleComponent = () => {
   const [searchTermThrottle, setSearchTermThrottle] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
 
-  console.log('exampleComponent re-renders')
-
   return (
     <>
-      <Fig config={debounceConfig}>
+      {/* <Fig config={debounceConfig}> */}
         <div className={'figdebounceInput'}>
           <h1>Fig Debounced Search Example</h1>
           <div>
@@ -33,7 +31,7 @@ const ExampleComponent = () => {
             <strong>Current Search Term:</strong> {figSearchTerm}
           </div>
         </div>
-      </Fig>
+      {/* </Fig> */}
 
       <div className={'debounceInput'}>
         <h1>Non-Fig Debounced Search Example</h1>
@@ -62,7 +60,7 @@ const ExampleComponent = () => {
         </div>
       </div>
 
-      <Fig config={throttleConfig}>
+      {/* <Fig config={throttleConfig}> */}
         <div className={'figthrottleInput'}>
           <h1>Fig Throttled Search Example</h1>
           <div>
@@ -77,7 +75,7 @@ const ExampleComponent = () => {
             <strong>Current Search Term:</strong> {figSearchTermThrottle}
           </div>
         </div>
-      </Fig>
+      {/* </Fig> */}
 
       <div className={'throttleInput'}>
         <h1>Non-Fig Throttled Search Example</h1>

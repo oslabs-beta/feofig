@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, Children, cloneElement, ChangeEvent, ReactNode, ReactElement } from 'react';
+import React, { useState, useEffect, useRef, cloneElement, ChangeEvent } from 'react';
 import { ThrottleProps } from '../types/types';
 
 const Throttle = ({
@@ -54,7 +54,7 @@ const Throttle = ({
   // return <>{clonedChildren}</>;
 
   const returnRenderedElement = (children: React.ReactElement) => {
-    return React.cloneElement(children as React.ReactElement, {
+    return cloneElement(children as React.ReactElement, {
       ...props,
       onChange: handleChange,
       value,
