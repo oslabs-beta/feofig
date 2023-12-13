@@ -73,15 +73,6 @@ const Debounce = (_a) => {
         }
     };
     const maybeRef = inputRef ? { ref: inputRef } : {};
-    // const clonedChildren = Children.map(children, (child) => {
-    //   return cloneElement(child as React.ReactElement, {
-    //     ...props,
-    //     onChange: handleChange,
-    //     value,
-    //     ...maybeRef,
-    //   });
-    // });
-    // return <>{clonedChildren}</>;
     const returnRenderedElement = (children) => {
         return cloneElement(children, Object.assign(Object.assign(Object.assign({}, props), { onChange: handleChange, value }), maybeRef));
     };
