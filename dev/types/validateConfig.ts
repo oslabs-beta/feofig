@@ -60,7 +60,7 @@ const validateConfigs = (config: Config) => {
       (typeof offset !== 'string' || !offsetPattern.test(offset))
     )
       throw new Error(
-        'Lazyload: offset must be a string containing a number followed by px'
+        'Lazyload: offset must be a string containing a number followed by px. (Ex: "100px")'
       );
   }
 
@@ -164,7 +164,7 @@ const validateConfigs = (config: Config) => {
       (typeof offset !== 'string' || !offsetPattern.test(offset))
     )
       throw new Error(
-        'DisableAnimations: offset must be a string containing a number followed by px'
+        'DisableAnimations: offset must be a string containing a number followed by px. (Ex: "100px")'
       );
 
     // validates "classes"
@@ -175,7 +175,9 @@ const validateConfigs = (config: Config) => {
     if (classes !== undefined) {
       for (let el of classes) {
         if (typeof el !== 'string') {
-          throw new Error('DisableAnimations: classes array can only contain strings');
+          throw new Error(
+            'DisableAnimations: classes array can only contain strings'
+          );
         }
       }
     }

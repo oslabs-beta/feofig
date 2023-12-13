@@ -4,7 +4,7 @@ import { ThrottleProps } from '../types/types';
 const Throttle = ({
   onChange,
   value: propValue,
-  minLength,
+  minLength = 0,
   throttleTimeout,
   children,
   inputRef,
@@ -42,16 +42,6 @@ const Throttle = ({
 
   const maybeRef = inputRef ? { ref: inputRef } : {};
 
-  // const clonedChildren = Children.map(children, (child) => {
-  //   return cloneElement(child as ReactElement, {
-  //     ...props,
-  //     onChange: handleChange,
-  //     value: value,
-  //     ...maybeRef,
-  //   });
-  // });
-
-  // return <>{clonedChildren}</>;
 
   const returnRenderedElement = (children: React.ReactElement) => {
     return cloneElement(children as React.ReactElement, {
