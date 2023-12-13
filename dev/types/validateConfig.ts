@@ -9,7 +9,7 @@ const validateConfigs = (config: Config) => {
     throw new Error('Configuration file must be an object!');
 
   // checks for additional unexpected properties
-  const allowedProps = ['lazyload', 'debounce', 'throttle', "animationDisable"];
+  const allowedProps = ['lazyload', 'debounce', 'throttle', 'animationDisable'];
   const actualProps = Object.keys(config);
   const invalidProps = actualProps.filter(
     (prop) => !allowedProps.includes(prop)
@@ -66,7 +66,9 @@ const validateConfigs = (config: Config) => {
 
   // prevents debounce and throttle simultaneously
   if (config.debounce && config.throttle) {
-    console.error('Both debounce and throttle are currently enabled in one of the configurations but are mutually exclusive. Please remove one of them')
+    console.error(
+      'Both debounce and throttle are currently enabled in one of the configurations but are mutually exclusive. Please remove one of them'
+    );
   }
 
   // validates "debounce"
@@ -128,6 +130,56 @@ const validateConfigs = (config: Config) => {
   }
 
   // add more config validations below:
+  // validates "lazyload"
+  if (config.animationDisable) {
+    const {threshold, offset, classes} = config.animationDisable;
+
+    // checks for additional unexpected properties
+    const allowedProps = ['threshold', 'offset', 'classes'];
+    const actualProps = Object.keys(config.animationDisable);
+    const invalidProps = actualProps.filter(
+      (prop) => !allowedProps.includes(prop)
+    );
+    if (invalidProps.length > 0) {
+      throw new Error(
+        `Invalid properties found in the lazyload configuration: ${invalidProps.join(
+          ', '
+        )}`
+      );
+    }
+
+    // validates "threshold"
+    if (
+      threshold !== undefined &&
+      (typeof threshold !== 'number' || threshold < 0 || threshold > 1)
+    )
+      throw new Error(
+        'DisableAnimations: threshold must be a valid number between 0 and 1'
+      );
+
+    // validates "offset"
+    const offsetPattern = /^-?\d+px$/;
+    if (
+      offset !== undefined &&
+      (typeof offset !== 'string' || !offsetPattern.test(offset))
+    )
+      throw new Error(
+        'DisableAnimations: offset must be a string containing a number followed by px'
+      );
+
+    // validates "classes"
+    if (classes !== undefined && !Array.isArray(classes)) {
+      throw new Error('DisableAnimations: classes must be an array');
+    }
+
+    if (classes !== undefined) {
+      for (let el of classes) {
+        if (typeof el !== 'string') {
+          throw new Error('DisableAnimations: classes array can only contain strings');
+        }
+      }
+    }
+  }
 };
 
 export default validateConfigs;

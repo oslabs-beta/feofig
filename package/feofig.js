@@ -4,7 +4,6 @@ import Debounce from './utils/debounce';
 import Throttle from './utils/throttle';
 import validateConfigs from './types/validateConfig';
 import AnimationDisable from './utils/animationdisable';
-('');
 const Fig = ({ children, config, placeholder }) => {
     const [transformedChildren, setTransformedChildren] = useState(null);
     const [finishedTransforming, setFinishedTransforming] = useState(false);
@@ -41,7 +40,9 @@ const Fig = ({ children, config, placeholder }) => {
             if (isDebounceEnabled) {
                 if (Array.isArray((_d = config.debounce) === null || _d === void 0 ? void 0 : _d.target)) {
                 }
-                else if (node.type === 'input') {
+                else if (node.type === 'input'
+                    || node.type === 'textarea'
+                    || node.type === 'select') {
                     return (React.createElement(React.Fragment, null,
                         React.createElement(Debounce, { onChange: node.props.onChange, minLength: ((_e = config.debounce) === null || _e === void 0 ? void 0 : _e.minLength) || 0, 
                             // there is a bug when delay is set to 100, idk why yet so adding 1 ms if user sets it to 100
@@ -52,6 +53,9 @@ const Fig = ({ children, config, placeholder }) => {
                     // default if array is not provided
                     // add debounceing/throttling depending on which is enabled and return
                 } // maybe account for other handlers besides button
+                else if (node.type === 'form') {
+                    return (React.createElement("form", Object.assign({}, node.props), React.Children.map(node.props.children, (child) => memoizedElementIsolator(child) || child)));
+                }
             }
             // still need to filter by config.target
             if (isThrottleEnabled) {

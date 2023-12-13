@@ -5,7 +5,6 @@ import Throttle from './utils/throttle';
 import validateConfigs from './types/validateConfig';
 import AnimationDisable from './utils/animationdisable';
 import {FigProps} from './types/types';
-('');
 
 const Fig = ({children, config, placeholder}: FigProps) => {
 

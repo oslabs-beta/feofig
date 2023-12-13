@@ -46,15 +46,15 @@ export const throttleConfig = {
   },
 }
 
-export const adaptiveLoading = {
-  '3g': {},
-};
+// export const adaptiveLoading = {
+//   '3g': {},
+// };
 
 
 export const animationDisableConfig = {
   animationDisable: {
     threshold: 0.5,
-    offset: "0px",
+    offset: "100px",
     classes: ['animate']
   }
 }
