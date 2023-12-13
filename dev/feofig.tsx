@@ -3,11 +3,15 @@ import LazyLoad from './utils/lazyload';
 import Debounce from './utils/debounce';
 import Throttle from './utils/throttle';
 import validateConfigs from './types/validateConfig';
+import AnimationDisable from './utils/animationdisable';
 import {FigProps} from './types/types';
 
 const Fig = ({children, config, placeholder}: FigProps) => {
-  const [transformedChildren, setTransformedChildren] = useState<React.ReactElement | null>(null);
-  const [finishedTransforming, setFinishedTransforming] = useState<Boolean>(false);
+
+  const [transformedChildren, setTransformedChildren] =
+    useState<React.ReactElement | null>(null);
+  const [finishedTransforming, setFinishedTransforming] =
+    useState<Boolean>(false);
 
   useEffect(() => {
     // tests to see if user inputs for config are valid, throws error if not
@@ -18,13 +22,10 @@ const Fig = ({children, config, placeholder}: FigProps) => {
   const isLazyLoadEnabled = config && config.lazyload;
   const isDebounceEnabled = config && config.debounce;
   const isThrottleEnabled = config && config.throttle;
-  const isTestingEnabled = config && config.test;
-
+  const isAnimationDisableEnabled = config && config.animationDisable;
 
   // Memoize the elementIsolator function to prevent unnecessary recalculations
   const memoizedElementIsolator = useMemo(() => {
-
-    console.log('memoized')
     // recursively iterates through elements to find desired type to wrap
     // worried about how this will affect performance especially with deeply nested component trees. maybe memoization or a hook to trigger selectively
     const elementIsolator = (node: React.ReactNode): React.ReactNode => {
@@ -33,7 +34,6 @@ const Fig = ({children, config, placeholder}: FigProps) => {
         return node;
       }
 
-      console.log('elementIsolator triggered')
       // might need to add a check here for other custom non-native wrappers
 
       // preserves non-element nodes like strings
@@ -59,7 +59,9 @@ const Fig = ({children, config, placeholder}: FigProps) => {
       // still need to filter by config.target
       if (isDebounceEnabled) {
         if (Array.isArray(config.debounce?.target)) {
-        } else if ((node as React.ReactElement).type === 'input') {
+        } else if ((node as React.ReactElement).type === 'input' 
+        || (node as React.ReactElement).type === 'textarea'
+        || (node as React.ReactElement).type === 'select') {
           return (
             <>
               <Debounce
@@ -80,6 +82,19 @@ const Fig = ({children, config, placeholder}: FigProps) => {
           // default if array is not provided
           // add debounceing/throttling depending on which is enabled and return
         } // maybe account for other handlers besides button
+        else if((node as React.ReactElement).type === 'form') {
+          return (
+            <form
+              {...(node as React.ReactElement).props}
+            >
+              {React.Children.map(
+                (node as React.ReactElement).props.children,
+                (child: React.ReactElement) =>
+                  memoizedElementIsolator(child) || child
+              )}
+            </form>
+          );
+        }
       }
 
       // still need to filter by config.target
@@ -104,6 +119,29 @@ const Fig = ({children, config, placeholder}: FigProps) => {
           // default if array is not provided
           // add debounceing/throttling depending on which is enabled and return
         } // maybe account for other handlers besides button
+      }
+
+
+      if (isAnimationDisableEnabled) {
+        // on the Config, developer will designate which css classes to disable by adding css class names to the "classes" property on animationDisable
+        // conditional is checking if any of the designated classes are applied to the node
+        if (
+          config.animationDisable?.classes.includes(
+            (node as React.ReactElement).props.className
+          )
+        ) {
+          console.log(node)
+          return (
+            <>
+              <AnimationDisable
+                threshold={config.animationDisable?.threshold}
+                offset={config.animationDisable?.offset}
+              >
+                {node}
+              </AnimationDisable>
+            </>
+          );
+        }
       }
 
       // can filter for more node types and apply other wrappers below:
@@ -132,7 +170,7 @@ const Fig = ({children, config, placeholder}: FigProps) => {
     }
 
     // calls recursive function, add more checks here if necessary
-    if (isLazyLoadEnabled || isDebounceEnabled || isThrottleEnabled) {
+    if (isLazyLoadEnabled || isDebounceEnabled || isThrottleEnabled || isAnimationDisableEnabled) {
       return memoizedElementIsolator(child) || child;
     }
   };

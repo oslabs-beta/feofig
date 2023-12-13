@@ -6,17 +6,16 @@ export const lazyLoadConfig = {
     // throttle
     // debounce
   },
-  debounce: {
-    delay: 1000,
-    minLength: 3,
-    // target: ['searchbar', 'autocomplete'], // if no array, then defaults to all
-  },
-  throttle: {
-    delay: 100,
-    minLength: 3,
-    // target: ['searchbar', 'autocomplete'], // if no array, then defaults to all
-  },
-  test: true, // tentative
+  // debounce: {
+  //   delay: 1000,
+  //   minLength: 3,
+  //   // target: ['searchbar', 'autocomplete'], // if no array, then defaults to all
+  // },
+  // throttle: {
+  //   delay: 100,
+  //   minLength: 3,
+  //   // target: ['searchbar', 'autocomplete'], // if no array, then defaults to all
+  // }
 
   // pre-fetching: true,
   // disableCSSanimations : true,
@@ -31,14 +30,31 @@ export const debounceConfig = {
   },
 }
 
-export const throttleConfig = {
-  throttle: {
-    delay: 100,
+export const debounceConfig2 = {
+  debounce: {
+    delay: 3000,
     minLength: 3,
     // target: ['searchbar', 'autocomplete'], // if no array, then defaults to all
   },
 }
 
-export const adaptiveLoading = {
-  '3g': {},
-};
+export const throttleConfig = {
+  throttle: {
+    delay: 1000,
+    minLength: 3,
+    // target: ['searchbar', 'autocomplete'], // if no array, then defaults to all
+  },
+}
+
+// export const adaptiveLoading = {
+//   '3g': {},
+// };
+
+
+export const animationDisableConfig = {
+  animationDisable: {
+    threshold: 0.5,
+    offset: "100px",
+    classes: ['animate']
+  }
+}

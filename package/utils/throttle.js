@@ -9,9 +9,9 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, cloneElement } from 'react';
 const Throttle = (_a) => {
-    var { onChange, value: propValue, minLength, throttleTimeout, children, inputRef } = _a, props = __rest(_a, ["onChange", "value", "minLength", "throttleTimeout", "children", "inputRef"]);
+    var { onChange, value: propValue, minLength = 0, throttleTimeout, children, inputRef } = _a, props = __rest(_a, ["onChange", "value", "minLength", "throttleTimeout", "children", "inputRef"]);
     const [value, setValue] = useState(propValue !== null && propValue !== void 0 ? propValue : '');
     const timeoutRef = useRef(null);
     useEffect(() => {
@@ -39,17 +39,8 @@ const Throttle = (_a) => {
         }
     };
     const maybeRef = inputRef ? { ref: inputRef } : {};
-    // const clonedChildren = Children.map(children, (child) => {
-    //   return cloneElement(child as ReactElement, {
-    //     ...props,
-    //     onChange: handleChange,
-    //     value: value,
-    //     ...maybeRef,
-    //   });
-    // });
-    // return <>{clonedChildren}</>;
     const returnRenderedElement = (children) => {
-        return React.cloneElement(children, Object.assign(Object.assign(Object.assign({}, props), { onChange: handleChange, value }), maybeRef));
+        return cloneElement(children, Object.assign(Object.assign(Object.assign({}, props), { onChange: handleChange, value }), maybeRef));
     };
     const newReactElement = returnRenderedElement(children);
     return newReactElement;

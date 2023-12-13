@@ -2,7 +2,6 @@ import React, {
   useState,
   useEffect,
   useRef,
-  Children,
   cloneElement,
   ChangeEvent,
 } from 'react';
@@ -92,19 +91,8 @@ const Debounce = ({
 
   const maybeRef = inputRef ? {ref: inputRef} : {};
 
-  // const clonedChildren = Children.map(children, (child) => {
-  //   return cloneElement(child as React.ReactElement, {
-  //     ...props,
-  //     onChange: handleChange,
-  //     value,
-  //     ...maybeRef,
-  //   });
-  // });
-
-  // return <>{clonedChildren}</>;
-
   const returnRenderedElement = (children: React.ReactElement) => {
-    return React.cloneElement(children as React.ReactElement, {
+    return cloneElement(children as React.ReactElement, {
       ...props,
       onChange: handleChange,
       value,

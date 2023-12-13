@@ -9,7 +9,7 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
-import React, { useState, useEffect, useRef, } from 'react';
+import { useState, useEffect, useRef, cloneElement, } from 'react';
 const Debounce = (_a) => {
     var { onChange, value: propValue, minLength = 0, 
     // there is a bug when timeout is set to 100, idk why yet so adding 1 ms if user sets it to 100
@@ -73,17 +73,8 @@ const Debounce = (_a) => {
         }
     };
     const maybeRef = inputRef ? { ref: inputRef } : {};
-    // const clonedChildren = Children.map(children, (child) => {
-    //   return cloneElement(child as React.ReactElement, {
-    //     ...props,
-    //     onChange: handleChange,
-    //     value,
-    //     ...maybeRef,
-    //   });
-    // });
-    // return <>{clonedChildren}</>;
     const returnRenderedElement = (children) => {
-        return React.cloneElement(children, Object.assign(Object.assign(Object.assign({}, props), { onChange: handleChange, value }), maybeRef));
+        return cloneElement(children, Object.assign(Object.assign(Object.assign({}, props), { onChange: handleChange, value }), maybeRef));
     };
     const newReactElement = returnRenderedElement(children);
     return newReactElement;

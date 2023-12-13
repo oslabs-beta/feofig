@@ -71,60 +71,50 @@ async function run(networkCondition, networkString, timeout) {
 
   // Navigate to url
   await page.goto(APP, {
-    waitUntil: 'networkidle2',
+    waitUntil: 'networkidle0',
   });
 
   const performanceMetrics = await client.send('Performance.getMetrics');
   const { metrics } = performanceMetrics;
 
-  new Promise((resolve, reject) => {
-    setTimeout(() => {
-      console.log(
-        '==============================================================='
-      );
-      console.log(`Benchmark for: ${networkString}`);
-      console.log(
-        `DOMContentLoaded: ${(
-          metrics[metrics.length - 2].value - metrics[metrics.length - 1].value
-        ).toFixed(4)} sec`
-      );
-      console.log(
-        `Finished: ${(
-          loadingFinished[loadingFinished.length - 1].timestamp -
-          requests[0].timestamp
-        ).toFixed(4)} sec`
-      );
-    }, timeout);
-  });
+  console.log(
+    '==============================================================='
+  );
+  console.log(`Benchmark for: ${networkString}`);
+  console.log(
+    `DOMContentLoaded: ${(
+      metrics[metrics.length - 2].value - metrics[metrics.length - 1].value
+    ).toFixed(4)} sec`
+  );
+  console.log(
+    `Finished: ${(
+      loadingFinished[loadingFinished.length - 1].timestamp -
+      requests[0].timestamp
+    ).toFixed(4)} sec`
+  );
 
-  // await browser.close();
+  await browser.close();
 }
 
 async function benchmark() {
-  let timeout = 3000;
-
   console.log('Starting benchmark. This may take a few seconds. Please wait.');
 
-  await run(networkConditions.dev, 'current network', timeout);
+  await run(networkConditions.dev, 'current network');
 
   if (includedNetworksArray.includes('4g'))
-    await run(networkConditions['4g'], '4g', timeout);
+    await run(networkConditions['4g'], '4g');
   if (includedNetworksArray.includes('3g')) {
-    timeout = 5000;
-    await run(networkConditions['3g'], '3g', timeout);
+    await run(networkConditions['3g'], '3g');
   }
   if (includedNetworksArray.includes('2g')) {
-    timeout = 10000;
-    await run(networkConditions['2g'], '2g', timeout);
+    await run(networkConditions['2g'], '2g');
   }
 
-  setTimeout(() => {
-    console.log(
-      '==============================================================='
-    );
-    console.log('Benchmark completed!');
-    process.exit();
-  }, timeout);
+  console.log(
+    '==============================================================='
+  );
+  console.log('Benchmark completed!');
+  process.exit();
 }
 
 benchmark();
