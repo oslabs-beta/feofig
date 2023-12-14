@@ -20,7 +20,7 @@ FEOFig is a one-stop-shop library for various front-end optimization techniques 
 ## Getting Started
 ### Installation
 ```
-npm install FEOFig
+npm install feofig
 ```
 
 ## Usage 
