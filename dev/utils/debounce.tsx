@@ -5,13 +5,13 @@ import React, {
   cloneElement,
   ChangeEvent,
 } from 'react';
-import {DebounceProps} from '../types/types';
+import { DebounceProps } from '../types/types';
 
 const Debounce = ({
   onChange,
   value: propValue,
   minLength = 0,
-  // there is a bug when timeout is set to 100, idk why yet so adding 1 ms if user sets it to 100
+  // there is an unsolved bug when timeout is set to 100, so adding 1 ms if user sets it to 100. If set to 100, will throw an error related to the 'notify' ref.
   debounceTimeout = 101,
   children,
   inputRef,
@@ -23,7 +23,7 @@ const Debounce = ({
   const isDebouncing = useRef<boolean>(false);
   const notify = useRef<((...args: any[]) => void) | null>(null);
 
-  // from https://levelup.gitconnected.com/debounce-from-scratch-8616c8209b54
+  // This function is inspired from https://levelup.gitconnected.com/debounce-from-scratch-8616c8209b54
   const debounce = (func: (...args: any[]) => void, wait: number) => {
     let timerId: NodeJS.Timeout;
     return (...args: any[]) => {
@@ -62,11 +62,7 @@ const Debounce = ({
     if (propValue !== undefined && propValue !== null && value !== propValue) {
       setValue(propValue);
     }
-
-    // tested removing this to fix 100 bug but didn't change anything
-    // if (debounceTimeout !== undefined && debounceTimeout !== 100) {
-      createNotifier(debounceTimeout);
-    // }
+    createNotifier(debounceTimeout);
   }, [propValue, debounceTimeout]);
 
   const doNotify = (...args: any[]) => {
@@ -75,7 +71,7 @@ const Debounce = ({
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     event.persist();
-    const {value: newValue} = event.target;
+    const { value: newValue } = event.target;
 
     setValue(newValue);
 
@@ -85,11 +81,11 @@ const Debounce = ({
     }
 
     if (value.length > newValue.length) {
-      notify.current?.({...event, target: {...event.target, value: ''}});
+      notify.current?.({ ...event, target: { ...event.target, value: '' } });
     }
   };
 
-  const maybeRef = inputRef ? {ref: inputRef} : {};
+  const maybeRef = inputRef ? { ref: inputRef } : {};
 
   const returnRenderedElement = (children: React.ReactElement) => {
     return cloneElement(children as React.ReactElement, {

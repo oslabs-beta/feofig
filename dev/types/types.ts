@@ -1,7 +1,7 @@
 export type Config = {
   lazyload?: LazyLoadConfig;
-  throttle?: ThrottleConfig; // not added
-  debounce?: DebounceConfig; // not added
+  throttle?: ThrottleConfig;
+  debounce?: DebounceConfig;
   pauseAnimation?: PauseAnimationConfig;
 };
 

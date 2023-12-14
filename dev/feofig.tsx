@@ -17,7 +17,6 @@ const Fig = ({ children, config, placeholder }: FigProps) => {
     validateConfigs(config);
   }, [config]);
 
-  // might get rid of these since it doesn't type guard well
   const isLazyLoadEnabled = config && config.lazyload;
   const isDebounceEnabled = config && config.debounce;
   const isThrottleEnabled = config && config.throttle;
@@ -25,15 +24,13 @@ const Fig = ({ children, config, placeholder }: FigProps) => {
 
   // Memoize the elementIsolator function to prevent unnecessary recalculations
   const memoizedElementIsolator = useMemo(() => {
-    // recursively iterates through elements to find desired type to wrap
-    // worried about how this will affect performance especially with deeply nested component trees. maybe memoization or a hook to trigger selectively
+    // Recursively iterates through elements to find desired type to wrap
+    // May affect performance when recursing on every rerender for deeply nested code.
     const elementIsolator = (node: React.ReactNode): React.ReactNode => {
       // check if the node is a Fig component, if so then ignore Fig
       if (React.isValidElement(node) && node.type === Fig) {
         return node;
       }
-
-      // might need to add a check here for other custom non-native wrappers
 
       // preserves non-element nodes like strings
       if (!React.isValidElement(node)) return node;
@@ -68,7 +65,7 @@ const Fig = ({ children, config, placeholder }: FigProps) => {
               <Debounce
                 onChange={(node as React.ReactElement).props.onChange}
                 minLength={config.debounce?.minLength || 0}
-                // there is a bug when delay is set to 100, idk why yet so adding 1 ms if user sets it to 100
+                // there is an unsolved bug when timeout is set to 100, so adding 1 ms if user sets it to 100. If set to 100, will throw an error related to the 'notify' ref in debounce.tsx
                 debounceTimeout={
                   config.debounce?.delay === undefined ||
                   config.debounce?.delay === 100
@@ -80,9 +77,7 @@ const Fig = ({ children, config, placeholder }: FigProps) => {
               </Debounce>
             </>
           );
-          // default if array is not provided
-          // add debounceing/throttling depending on which is enabled and return
-        } // maybe account for other handlers besides button
+        } 
         else if ((node as React.ReactElement).type === 'form') {
           return (
             <form {...(node as React.ReactElement).props}>
@@ -96,7 +91,6 @@ const Fig = ({ children, config, placeholder }: FigProps) => {
         }
       }
 
-      // still need to filter by config.target
       if (isThrottleEnabled) {
         if (Array.isArray(config.throttle?.target)) {
         } else if ((node as React.ReactElement).type === 'input') {
@@ -115,13 +109,11 @@ const Fig = ({ children, config, placeholder }: FigProps) => {
               </Throttle>
             </>
           );
-          // default if array is not provided
-          // add debounceing/throttling depending on which is enabled and return
-        } // maybe account for other handlers besides button
+        } 
       }
 
       if (isPauseAnimationEnabled) {
-        // on the Config, developer will designate which css classes to disable by adding css class names to the "classes" property on animationDisable
+        // in the Config, developer will designate which css classes to disable by adding css class names to the "classes" property on 'pauseAnimation'
         // conditional is checking if any of the designated classes are applied to the node
         if (
           config.pauseAnimation?.classes.includes(
@@ -140,8 +132,6 @@ const Fig = ({ children, config, placeholder }: FigProps) => {
           );
         }
       }
-
-      // can filter for more node types and apply other wrappers below:
 
       // if node has children, recursively transform them to fit react props children array format
       if (node.props && (node as React.ReactElement).props.children) {

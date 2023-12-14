@@ -12,12 +12,12 @@ var __rest = (this && this.__rest) || function (s, e) {
 import { useState, useEffect, useRef, cloneElement, } from 'react';
 const Debounce = (_a) => {
     var { onChange, value: propValue, minLength = 0, 
-    // there is a bug when timeout is set to 100, idk why yet so adding 1 ms if user sets it to 100
+    // there is an unsolved bug when timeout is set to 100, so adding 1 ms if user sets it to 100. If set to 100, will throw an error related to the 'notify' ref.
     debounceTimeout = 101, children, inputRef } = _a, props = __rest(_a, ["onChange", "value", "minLength", "debounceTimeout", "children", "inputRef"]);
     const [value, setValue] = useState(typeof propValue === 'undefined' || propValue === null ? '' : propValue);
     const isDebouncing = useRef(false);
     const notify = useRef(null);
-    // from https://levelup.gitconnected.com/debounce-from-scratch-8616c8209b54
+    // This function is inspired from https://levelup.gitconnected.com/debounce-from-scratch-8616c8209b54
     const debounce = (func, wait) => {
         let timerId;
         return (...args) => {
@@ -51,10 +51,7 @@ const Debounce = (_a) => {
         if (propValue !== undefined && propValue !== null && value !== propValue) {
             setValue(propValue);
         }
-        // tested removing this to fix 100 bug but didn't change anything
-        // if (debounceTimeout !== undefined && debounceTimeout !== 100) {
         createNotifier(debounceTimeout);
-        // }
     }, [propValue, debounceTimeout]);
     const doNotify = (...args) => {
         onChange(...args);

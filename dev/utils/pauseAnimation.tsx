@@ -1,5 +1,5 @@
-import React, {useEffect, useRef, cloneElement} from 'react';
-import {PauseAnimationProps} from '../types/types';
+import React, { useEffect, useRef, cloneElement } from 'react';
+import { PauseAnimationProps } from '../types/types';
 import styles from './pauseAnimation.module.css';
 
 const PauseAnimation = ({
@@ -23,11 +23,8 @@ const PauseAnimation = ({
       entries.forEach((entry) => {
         const element = entry.target as HTMLElement;
         if (entry.isIntersecting) {
-          // element.style.animationDuration = children?.style.animationDuration
           element.classList.remove(styles.pause);
-          // element.classList.add(styles.pause);
         } else {
-          //element.style.animationDuration = '0s !important';
           element.classList.add(styles.pause);
         }
       });
@@ -44,7 +41,7 @@ const PauseAnimation = ({
     };
   }, []);
 
-  return cloneElement((children as React.ReactElement), {ref: elementRef});
+  return cloneElement(children as React.ReactElement, { ref: elementRef });
 };
 
 export default PauseAnimation;
