@@ -1,12 +1,12 @@
 import React, {useEffect, useRef, cloneElement} from 'react';
-import {AnimationDisableProps} from '../types/types';
-import styles from './animationDisable.module.css';
+import {PauseAnimationProps} from '../types/types';
+import styles from './pauseAnimation.module.css';
 
-const AnimationDisable = ({
+const PauseAnimation = ({
   children,
   threshold = 0.5,
   offset = '0px',
-}: AnimationDisableProps) => {
+}: PauseAnimationProps) => {
   const elementRef = useRef(null);
 
   useEffect(() => {
@@ -24,11 +24,11 @@ const AnimationDisable = ({
         const element = entry.target as HTMLElement;
         if (entry.isIntersecting) {
           // element.style.animationDuration = children?.style.animationDuration
-          element.classList.remove(styles.disable);
-          // element.classList.add(styles.disable);
+          element.classList.remove(styles.pause);
+          // element.classList.add(styles.pause);
         } else {
           //element.style.animationDuration = '0s !important';
-          element.classList.add(styles.disable);
+          element.classList.add(styles.pause);
         }
       });
     };
@@ -47,4 +47,4 @@ const AnimationDisable = ({
   return cloneElement((children as React.ReactElement), {ref: elementRef});
 };
 
-export default AnimationDisable;
+export default PauseAnimation;
