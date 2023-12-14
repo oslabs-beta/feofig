@@ -106,7 +106,7 @@ debounce: {
 ```
 **_`delay`_**: Amount of time (in milliseconds) to be delayed after the last change in the input value before the `onChange` function is triggered. For example, if set to 1000, `onChange` function will not fire until 1 second elapses after user stops making changes.
 
-**_`minLength`_**: Minimum length of the input value for which the `onChange` function will be triggered. If the length of the input value is less than `minLength`, the `onChange` function will not be inovked.
+**_`minLength`_**: Minimum length of the input value for which the `onChange` function will be triggered. If the length of the input value is less than `minLength`, the `onChange` function will not be invoked.
 
 > Note: The function to be debounced should be given to the `onChange` attribute of any target element(s)<br>_For example:_<br>`<textarea onChange={handleChange}></textarea>`
 
@@ -120,7 +120,7 @@ throttle: {
 ```
 **_`delay`_**: Minimum time interval (in milliseconds) between consecutive invocations of `onChange` function. For example, `delay` set to 1000 means the `onChange` function will only be triggered once every 1 second if user makes changes continuously.
 
-**_`minLength`_**: Minimum length of the input value for which the `onChange` function will be triggered. If the length of the input value is less than `minLength`, the `onChange` function will not be inovked.
+**_`minLength`_**: Minimum length of the input value for which the `onChange` function will be triggered. If the length of the input value is less than `minLength`, the `onChange` function will not be invoked.
 
 > Note: The function to be throttled should be given to the `onChange` attribute of any target element(s)<br>_For example:_<br>`<textarea onChange={handleChange}></textarea>`
 
@@ -174,14 +174,14 @@ Andy Lam
 Zack Rauzi
 
 ### How To Contribute
-Fork me! 🍴 <br>
-Clone forked repo! <br>
-Edit code! <br>
-Make a Pull Request! <br>
+**🙏 _Contributions are welcomed_ 🙏**<br><br>
+🍴 Fork me! <br>
+👐 Clone forked repo! <br>
+📋 Commit changes! <br>
+📤 Make a Pull Request! <br>
 
 ## License
-<!-- Will add appropriate license.md file once we decide on which license to use -->
-Distributed under the [ISC or MIT] License. 
+Distributed under the [ISC or MIT] License.
 
 ## Tech Stack
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
