@@ -18,7 +18,6 @@ const ExampleComponent = () => {
         <div className={'figdebounceInput'}>
           <h1>Fig Debounced Search Example</h1>
           <div>
-            {/* <textarea /> */}
             <input
               type='text'
               onChange={(event) => {
@@ -35,8 +34,6 @@ const ExampleComponent = () => {
           <h1>Debounced Form Example</h1>
           <form onSubmit={(event) => {
                 event.preventDefault();
-                console.log('Saved');
-                // Add your autosave logic here
               }}>
             <label>
               Notes:<br />
@@ -70,14 +67,6 @@ const ExampleComponent = () => {
       </Fig>
       <div className={'debounceInput'}>
         <h1>Non-Fig Debounced Search Example</h1>
-        {/* <Debounce
-          element="input"
-          type="text"
-          onChange={(event) => {setSearchTerm(event.target.value)}}
-          value={searchTerm}
-          minLength={3} // Specify the minimum length before triggering the search
-          debounceTimeout={1000} // Specify the debounce timeout (in milliseconds)
-        /> */}
         <Debounce
           onChange={(event) => {
             setSearchTerm(event.target.value);
@@ -86,7 +75,6 @@ const ExampleComponent = () => {
           debounceTimeout={100}
         >
           <div>
-            {/* <textarea /> */}
             <input type='text' /> {/* <- input element wrapped with Debounce */}
           </div>
         </Debounce>
@@ -114,14 +102,6 @@ const ExampleComponent = () => {
 
       <div className={'throttleInput'}>
         <h1>Non-Fig Throttled Search Example</h1>
-        {/* <Throttle
-          element="input"
-          type="text"
-          onChange={(event) => {setSearchTermThrottle(event.target.value)}}
-          value={searchTermThrottle}
-          minLength={0} // Specify the minimum length before triggering the search
-          throttleTimeout={500} // Specify the throttle timeout (in milliseconds)
-        /> */}
         <Throttle
           onChange={(event) => {
             setSearchTermThrottle(event.target.value);
@@ -131,7 +111,6 @@ const ExampleComponent = () => {
         >
           <div>
             <input type='text' /> {/* <- input element wrapped with Throttle */}
-            {/* <textarea /> */}
           </div>
         </Throttle>
         <div>
