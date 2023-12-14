@@ -8,6 +8,7 @@ Turn complex front-end optimization into a simple task while maintaining readabi
 ## About
 FEOFig is a one-stop-shop library for various front-end optimization techniques that developers can configure and apply to elements using "figs", which are reusable drop-in wrappers containing your customized settings. After configuring settings for your desired technique(s) in a separate "config" file, the figs are ready to wrap around single, multiple, or even nested elements.
 
+
 ## Features
 ➡️ Lazy Loading <br>
 ➡️ Debouncing <br>
@@ -25,6 +26,7 @@ npm install FEOFig
 ## Usage 
 ### Fig Wrapper
 Import the Fig wrapper from the FEOFig library and wrap it around your code. The Fig wrapper will apply optimizations based on a "config" object passed into the "config" prop.
+
 ```javascript
 import Fig from 'feofig';
 import { configExample } from './config.js';
