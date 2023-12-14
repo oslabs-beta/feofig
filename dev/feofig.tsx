@@ -1,12 +1,12 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import LazyLoad from './utils/lazyload';
 import Debounce from './utils/debounce';
 import Throttle from './utils/throttle';
 import validateConfigs from './types/validateConfig';
 import PauseAnimation from './utils/pauseAnimation';
-import { FigProps } from './types/types';
+import {FigProps} from './types/types';
 
-const Fig = ({ children, config, placeholder }: FigProps) => {
+const Fig = ({children, config, placeholder}: FigProps) => {
   const [transformedChildren, setTransformedChildren] =
     useState<React.ReactElement | null>(null);
   const [finishedTransforming, setFinishedTransforming] =
@@ -14,7 +14,9 @@ const Fig = ({ children, config, placeholder }: FigProps) => {
 
   useEffect(() => {
     // tests to see if user inputs for config are valid, throws error if not
-    validateConfigs(config);
+
+    if (config.validate === undefined || config.validate === true)
+      validateConfigs(config);
   }, [config]);
 
   const isLazyLoadEnabled = config && config.lazyload;
@@ -34,6 +36,27 @@ const Fig = ({ children, config, placeholder }: FigProps) => {
 
       // preserves non-element nodes like strings
       if (!React.isValidElement(node)) return node;
+
+      if (isPauseAnimationEnabled) {
+        // in the Config, developer will designate which css classes to disable by adding css class names to the "classes" property on 'pauseAnimation'
+        // conditional is checking if any of the designated classes are applied to the node
+        if (
+          config.pauseAnimation?.classes.includes(
+            (node as React.ReactElement).props.className
+          )
+        ) {
+          return (
+            <>
+              <PauseAnimation
+                threshold={config.pauseAnimation?.threshold}
+                offset={config.pauseAnimation?.offset}
+              >
+                {node}
+              </PauseAnimation>
+            </>
+          );
+        }
+      }
 
       // if node is an image, wrap it with LazyLoad
       if (isLazyLoadEnabled) {
@@ -77,8 +100,7 @@ const Fig = ({ children, config, placeholder }: FigProps) => {
               </Debounce>
             </>
           );
-        } 
-        else if ((node as React.ReactElement).type === 'form') {
+        } else if ((node as React.ReactElement).type === 'form') {
           return (
             <form {...(node as React.ReactElement).props}>
               {React.Children.map(
@@ -109,29 +131,10 @@ const Fig = ({ children, config, placeholder }: FigProps) => {
               </Throttle>
             </>
           );
-        } 
-      }
-
-      if (isPauseAnimationEnabled) {
-        // in the Config, developer will designate which css classes to disable by adding css class names to the "classes" property on 'pauseAnimation'
-        // conditional is checking if any of the designated classes are applied to the node
-        if (
-          config.pauseAnimation?.classes.includes(
-            (node as React.ReactElement).props.className
-          )
-        ) {
-          return (
-            <>
-              <PauseAnimation
-                threshold={config.pauseAnimation?.threshold}
-                offset={config.pauseAnimation?.offset}
-              >
-                {node}
-              </PauseAnimation>
-            </>
-          );
         }
       }
+
+
 
       // if node has children, recursively transform them to fit react props children array format
       if (node.props && (node as React.ReactElement).props.children) {
