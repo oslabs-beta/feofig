@@ -40,7 +40,7 @@ const Fig = ({ children, config, placeholder }) => {
             // if node is an image, wrap it with LazyLoad
             if (isLazyLoadEnabled) {
                 if (node.type === 'img') {
-                    return (React.createElement(LazyLoad, { key: crypto.randomUUID(), threshold: ((_d = config.lazyload) === null || _d === void 0 ? void 0 : _d.threshold) || 0, placeholder: placeholder, once: ((_e = config.lazyload) === null || _e === void 0 ? void 0 : _e.once) !== false, offset: ((_f = config.lazyload) === null || _f === void 0 ? void 0 : _f.offset) || '0px' }, node));
+                    return (React.createElement(LazyLoad, { key: (Math.random() * Math.random() * 99999).toString(), threshold: ((_d = config.lazyload) === null || _d === void 0 ? void 0 : _d.threshold) || 0, placeholder: placeholder, once: ((_e = config.lazyload) === null || _e === void 0 ? void 0 : _e.once) !== false, offset: ((_f = config.lazyload) === null || _f === void 0 ? void 0 : _f.offset) || '0px' }, node));
                 }
             }
             // still need to filter by config.target
