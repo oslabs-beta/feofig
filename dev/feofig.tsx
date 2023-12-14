@@ -128,7 +128,6 @@ const Fig = ({ children, config, placeholder }: FigProps) => {
             (node as React.ReactElement).props.className
           )
         ) {
-          console.log(node);
           return (
             <>
               <PauseAnimation
