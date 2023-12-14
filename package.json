@@ -1,6 +1,6 @@
 {
   "name": "feofig",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Front-End Optimizer & Configurer",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,7 @@
     "url": "git+https://github.com/oslabs-beta/feofig.git"
   },
   "author": "Andy Lam, Cristina Lee, Keidy Wuang, Zack Rauzi",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/oslabs-beta/feofig/issues"
   },

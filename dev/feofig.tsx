@@ -1,12 +1,12 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import LazyLoad from './utils/lazyload';
 import Debounce from './utils/debounce';
 import Throttle from './utils/throttle';
 import validateConfigs from './types/validateConfig';
 import PauseAnimation from './utils/pauseAnimation';
-import {FigProps} from './types/types';
+import { FigProps } from './types/types';
 
-const Fig = ({children, config, placeholder}: FigProps) => {
+const Fig = ({ children, config, placeholder }: FigProps) => {
   const [transformedChildren, setTransformedChildren] =
     useState<React.ReactElement | null>(null);
   const [finishedTransforming, setFinishedTransforming] =
@@ -63,7 +63,7 @@ const Fig = ({children, config, placeholder}: FigProps) => {
         if (node.type === 'img') {
           return (
             <LazyLoad
-              key={crypto.randomUUID()}
+              key={(Math.random() * Math.random() * 99999).toString()}
               threshold={config.lazyload?.threshold || 0} // default: 0
               placeholder={placeholder}
               once={config.lazyload?.once !== false} // default: false
@@ -133,8 +133,6 @@ const Fig = ({children, config, placeholder}: FigProps) => {
           );
         }
       }
-
-
 
       // if node has children, recursively transform them to fit react props children array format
       if (node.props && (node as React.ReactElement).props.children) {
