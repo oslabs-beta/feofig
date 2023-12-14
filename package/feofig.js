@@ -9,7 +9,9 @@ const Fig = ({ children, config, placeholder }) => {
     const [finishedTransforming, setFinishedTransforming] = useState(false);
     useEffect(() => {
         // tests to see if user inputs for config are valid, throws error if not
-        validateConfigs(config);
+        if (config.validate === undefined || config.validate === true) {
+            validateConfigs(config);
+        }
     }, [config]);
     // might get rid of these since it doesn't type guard well
     const isLazyLoadEnabled = config && config.lazyload;
@@ -57,27 +59,26 @@ const Fig = ({ children, config, placeholder }) => {
                     return (React.createElement("form", Object.assign({}, node.props), React.Children.map(node.props.children, (child) => memoizedElementIsolator(child) || child)));
                 }
             }
-            // still need to filter by config.target
-            if (isThrottleEnabled) {
-                if (Array.isArray((_j = config.throttle) === null || _j === void 0 ? void 0 : _j.target)) {
-                }
-                else if (node.type === 'input') {
-                    return (React.createElement(React.Fragment, null,
-                        React.createElement(Throttle, { onChange: node.props.onChange, minLength: ((_k = config.throttle) === null || _k === void 0 ? void 0 : _k.minLength) || 0, throttleTimeout: ((_l = config.throttle) === null || _l === void 0 ? void 0 : _l.delay) === undefined
-                                ? 100
-                                : (_m = config.throttle) === null || _m === void 0 ? void 0 : _m.delay }, node)));
-                    // default if array is not provided
-                    // add debounceing/throttling depending on which is enabled and return
-                } // maybe account for other handlers besides button
-            }
             if (isAnimationDisableEnabled) {
                 // on the Config, developer will designate which css classes to disable by adding css class names to the "classes" property on animationDisable
                 // conditional is checking if any of the designated classes are applied to the node
-                if ((_o = config.animationDisable) === null || _o === void 0 ? void 0 : _o.classes.includes(node.props.className)) {
-                    console.log(node);
+                if ((_j = config.animationDisable) === null || _j === void 0 ? void 0 : _j.classes.includes(node.props.className)) {
                     return (React.createElement(React.Fragment, null,
-                        React.createElement(AnimationDisable, { threshold: (_p = config.animationDisable) === null || _p === void 0 ? void 0 : _p.threshold, offset: (_q = config.animationDisable) === null || _q === void 0 ? void 0 : _q.offset }, node)));
+                        React.createElement(AnimationDisable, { threshold: (_k = config.animationDisable) === null || _k === void 0 ? void 0 : _k.threshold, offset: (_l = config.animationDisable) === null || _l === void 0 ? void 0 : _l.offset }, node)));
                 }
+            }
+            // still need to filter by config.target
+            if (isThrottleEnabled) {
+                if (Array.isArray((_m = config.throttle) === null || _m === void 0 ? void 0 : _m.target)) {
+                }
+                else if (node.type === 'input') {
+                    return (React.createElement(React.Fragment, null,
+                        React.createElement(Throttle, { onChange: node.props.onChange, minLength: ((_o = config.throttle) === null || _o === void 0 ? void 0 : _o.minLength) || 0, throttleTimeout: ((_p = config.throttle) === null || _p === void 0 ? void 0 : _p.delay) === undefined
+                                ? 100
+                                : (_q = config.throttle) === null || _q === void 0 ? void 0 : _q.delay }, node)));
+                    // default if array is not provided
+                    // add debounceing/throttling depending on which is enabled and return
+                } // maybe account for other handlers besides button
             }
             // can filter for more node types and apply other wrappers below:
             // if node has children, recursively transform them to fit react props children array format

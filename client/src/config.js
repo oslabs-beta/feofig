@@ -6,6 +6,7 @@ export const lazyLoadConfig = {
     // throttle
     // debounce
   },
+  lalal: 'hello',
   // debounce: {
   //   delay: 1000,
   //   minLength: 3,
@@ -20,6 +21,7 @@ export const lazyLoadConfig = {
   // pre-fetching: true,
   // disableCSSanimations : true,
   // disableCustomFonts: true,
+  validate: true,
 };
 
 export const debounceConfig = {

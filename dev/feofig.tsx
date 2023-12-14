@@ -15,7 +15,9 @@ const Fig = ({children, config, placeholder}: FigProps) => {
 
   useEffect(() => {
     // tests to see if user inputs for config are valid, throws error if not
-    validateConfigs(config);
+    if (config.validate === undefined || config.validate === true) {
+      validateConfigs(config);
+    }
   }, [config]);
 
   // might get rid of these since it doesn't type guard well
