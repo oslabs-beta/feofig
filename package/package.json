@@ -1,6 +1,6 @@
 {
     "name": "feofig",
-    "version": "0.4.2",
+    "version": "0.4.3",
     "description": "Front-End Optimizer & Configurer",
     "main": "feofig.js",
     "repository": {
