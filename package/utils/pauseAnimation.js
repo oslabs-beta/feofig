@@ -12,12 +12,9 @@ const PauseAnimation = ({ children, threshold = 0.5, offset = '0px', }) => {
             entries.forEach((entry) => {
                 const element = entry.target;
                 if (entry.isIntersecting) {
-                    // element.style.animationDuration = children?.style.animationDuration
                     element.classList.remove(styles.pause);
-                    // element.classList.add(styles.pause);
                 }
                 else {
-                    //element.style.animationDuration = '0s !important';
                     element.classList.add(styles.pause);
                 }
             });

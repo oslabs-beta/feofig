@@ -4,7 +4,7 @@ const LazyLoad = ({ children, threshold = 0, placeholder, once, offset = '0px', 
     useEffect(() => {
         const options = {
             root: null,
-            // PROB NEEDS CHANGE: rootmargin default is '0px 0px 0px 0px'
+            // NEEDS CHANGE: rootmargin default to '0px 0px 0px 0px', currently only accepts one '-px'. 
             rootMargin: offset, // user config for offset
             threshold: threshold, // user config for threshold
         };

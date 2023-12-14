@@ -75,8 +75,7 @@ const validateConfigs = (config) => {
             (typeof minLength !== 'number' || minLength < 0))
             throw new Error('Debounce: minLength must be a valid, positive number');
     }
-    // add more config validations below:
-    // validates "lazyload"
+    // validates "pauseAnimation"
     if (config.pauseAnimation) {
         const { threshold, offset, classes } = config.pauseAnimation;
         // checks for additional unexpected properties
