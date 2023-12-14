@@ -17,7 +17,6 @@ const AnimateComponent = () => {
         <div className='animate' />
         <div className='animate' />
         <div className='animate' />
-        <div className='animate' />
     </div>
       </Fig>
   );

@@ -97,6 +97,27 @@ const Fig = ({children, config, placeholder}: FigProps) => {
         }
       }
 
+      if (isAnimationDisableEnabled) {
+        // on the Config, developer will designate which css classes to disable by adding css class names to the "classes" property on animationDisable
+        // conditional is checking if any of the designated classes are applied to the node
+        if (
+          config.animationDisable?.classes.includes(
+            (node as React.ReactElement).props.className
+          )
+        ) {
+          return (
+            <>
+              <AnimationDisable
+                threshold={config.animationDisable?.threshold}
+                offset={config.animationDisable?.offset}
+              >
+                {node}
+              </AnimationDisable>
+            </>
+          );
+        }
+      }
+
       // still need to filter by config.target
       if (isThrottleEnabled) {
         if (Array.isArray(config.throttle?.target)) {
@@ -121,28 +142,6 @@ const Fig = ({children, config, placeholder}: FigProps) => {
         } // maybe account for other handlers besides button
       }
 
-
-      if (isAnimationDisableEnabled) {
-        // on the Config, developer will designate which css classes to disable by adding css class names to the "classes" property on animationDisable
-        // conditional is checking if any of the designated classes are applied to the node
-        if (
-          config.animationDisable?.classes.includes(
-            (node as React.ReactElement).props.className
-          )
-        ) {
-          console.log(node)
-          return (
-            <>
-              <AnimationDisable
-                threshold={config.animationDisable?.threshold}
-                offset={config.animationDisable?.offset}
-              >
-                {node}
-              </AnimationDisable>
-            </>
-          );
-        }
-      }
 
       // can filter for more node types and apply other wrappers below:
 
