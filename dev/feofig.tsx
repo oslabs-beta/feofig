@@ -1,13 +1,12 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import LazyLoad from './utils/lazyload';
 import Debounce from './utils/debounce';
 import Throttle from './utils/throttle';
 import validateConfigs from './types/validateConfig';
-import AnimationDisable from './utils/animationdisable';
-import {FigProps} from './types/types';
+import PauseAnimation from './utils/pauseAnimation';
+import { FigProps } from './types/types';
 
-const Fig = ({children, config, placeholder}: FigProps) => {
-
+const Fig = ({ children, config, placeholder }: FigProps) => {
   const [transformedChildren, setTransformedChildren] =
     useState<React.ReactElement | null>(null);
   const [finishedTransforming, setFinishedTransforming] =
@@ -22,7 +21,7 @@ const Fig = ({children, config, placeholder}: FigProps) => {
   const isLazyLoadEnabled = config && config.lazyload;
   const isDebounceEnabled = config && config.debounce;
   const isThrottleEnabled = config && config.throttle;
-  const isAnimationDisableEnabled = config && config.animationDisable;
+  const isPauseAnimationEnabled = config && config.pauseAnimation;
 
   // Memoize the elementIsolator function to prevent unnecessary recalculations
   const memoizedElementIsolator = useMemo(() => {
@@ -59,9 +58,11 @@ const Fig = ({children, config, placeholder}: FigProps) => {
       // still need to filter by config.target
       if (isDebounceEnabled) {
         if (Array.isArray(config.debounce?.target)) {
-        } else if ((node as React.ReactElement).type === 'input' 
-        || (node as React.ReactElement).type === 'textarea'
-        || (node as React.ReactElement).type === 'select') {
+        } else if (
+          (node as React.ReactElement).type === 'input' ||
+          (node as React.ReactElement).type === 'textarea' ||
+          (node as React.ReactElement).type === 'select'
+        ) {
           return (
             <>
               <Debounce
@@ -82,11 +83,9 @@ const Fig = ({children, config, placeholder}: FigProps) => {
           // default if array is not provided
           // add debounceing/throttling depending on which is enabled and return
         } // maybe account for other handlers besides button
-        else if((node as React.ReactElement).type === 'form') {
+        else if ((node as React.ReactElement).type === 'form') {
           return (
-            <form
-              {...(node as React.ReactElement).props}
-            >
+            <form {...(node as React.ReactElement).props}>
               {React.Children.map(
                 (node as React.ReactElement).props.children,
                 (child: React.ReactElement) =>
@@ -121,24 +120,22 @@ const Fig = ({children, config, placeholder}: FigProps) => {
         } // maybe account for other handlers besides button
       }
 
-
-      if (isAnimationDisableEnabled) {
+      if (isPauseAnimationEnabled) {
         // on the Config, developer will designate which css classes to disable by adding css class names to the "classes" property on animationDisable
         // conditional is checking if any of the designated classes are applied to the node
         if (
-          config.animationDisable?.classes.includes(
+          config.pauseAnimation?.classes.includes(
             (node as React.ReactElement).props.className
           )
         ) {
-          console.log(node)
           return (
             <>
-              <AnimationDisable
-                threshold={config.animationDisable?.threshold}
-                offset={config.animationDisable?.offset}
+              <PauseAnimation
+                threshold={config.pauseAnimation?.threshold}
+                offset={config.pauseAnimation?.offset}
               >
                 {node}
-              </AnimationDisable>
+              </PauseAnimation>
             </>
           );
         }
@@ -170,7 +167,12 @@ const Fig = ({children, config, placeholder}: FigProps) => {
     }
 
     // calls recursive function, add more checks here if necessary
-    if (isLazyLoadEnabled || isDebounceEnabled || isThrottleEnabled || isAnimationDisableEnabled) {
+    if (
+      isLazyLoadEnabled ||
+      isDebounceEnabled ||
+      isThrottleEnabled ||
+      isPauseAnimationEnabled
+    ) {
       return memoizedElementIsolator(child) || child;
     }
   };

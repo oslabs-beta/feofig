@@ -3,7 +3,7 @@ export type Config = {
     lazyload?: LazyLoadConfig;
     throttle?: ThrottleConfig;
     debounce?: DebounceConfig;
-    animationDisable?: AnimationDisableConfig;
+    pauseAnimation?: PauseAnimationConfig;
 };
 export type LazyLoadConfig = {
     threshold?: number;
@@ -20,7 +20,7 @@ export type DebounceConfig = {
     target?: string[];
     minLength?: number;
 };
-export type AnimationDisableConfig = {
+export type PauseAnimationConfig = {
     threshold?: number;
     offset?: string;
     classes: string[];
@@ -54,7 +54,7 @@ export type ThrottleProps = {
     children: React.ReactNode;
     inputRef?: React.RefObject<HTMLInputElement>;
 };
-export type AnimationDisableProps = {
+export type PauseAnimationProps = {
     children: React.ReactNode;
     threshold?: number;
     offset?: string;
