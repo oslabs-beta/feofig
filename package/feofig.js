@@ -3,7 +3,7 @@ import LazyLoad from './utils/lazyload';
 import Debounce from './utils/debounce';
 import Throttle from './utils/throttle';
 import validateConfigs from './types/validateConfig';
-import AnimationDisable from './utils/animationdisable';
+import PauseAnimation from './utils/pauseAnimation';
 const Fig = ({ children, config, placeholder }) => {
     const [transformedChildren, setTransformedChildren] = useState(null);
     const [finishedTransforming, setFinishedTransforming] = useState(false);
@@ -15,7 +15,7 @@ const Fig = ({ children, config, placeholder }) => {
     const isLazyLoadEnabled = config && config.lazyload;
     const isDebounceEnabled = config && config.debounce;
     const isThrottleEnabled = config && config.throttle;
-    const isAnimationDisableEnabled = config && config.animationDisable;
+    const isPauseAnimationEnabled = config && config.pauseAnimation;
     // Memoize the elementIsolator function to prevent unnecessary recalculations
     const memoizedElementIsolator = useMemo(() => {
         // recursively iterates through elements to find desired type to wrap
@@ -40,9 +40,9 @@ const Fig = ({ children, config, placeholder }) => {
             if (isDebounceEnabled) {
                 if (Array.isArray((_d = config.debounce) === null || _d === void 0 ? void 0 : _d.target)) {
                 }
-                else if (node.type === 'input'
-                    || node.type === 'textarea'
-                    || node.type === 'select') {
+                else if (node.type === 'input' ||
+                    node.type === 'textarea' ||
+                    node.type === 'select') {
                     return (React.createElement(React.Fragment, null,
                         React.createElement(Debounce, { onChange: node.props.onChange, minLength: ((_e = config.debounce) === null || _e === void 0 ? void 0 : _e.minLength) || 0, 
                             // there is a bug when delay is set to 100, idk why yet so adding 1 ms if user sets it to 100
@@ -70,13 +70,13 @@ const Fig = ({ children, config, placeholder }) => {
                     // add debounceing/throttling depending on which is enabled and return
                 } // maybe account for other handlers besides button
             }
-            if (isAnimationDisableEnabled) {
+            if (isPauseAnimationEnabled) {
                 // on the Config, developer will designate which css classes to disable by adding css class names to the "classes" property on animationDisable
                 // conditional is checking if any of the designated classes are applied to the node
-                if ((_o = config.animationDisable) === null || _o === void 0 ? void 0 : _o.classes.includes(node.props.className)) {
+                if ((_o = config.pauseAnimation) === null || _o === void 0 ? void 0 : _o.classes.includes(node.props.className)) {
                     console.log(node);
                     return (React.createElement(React.Fragment, null,
-                        React.createElement(AnimationDisable, { threshold: (_p = config.animationDisable) === null || _p === void 0 ? void 0 : _p.threshold, offset: (_q = config.animationDisable) === null || _q === void 0 ? void 0 : _q.offset }, node)));
+                        React.createElement(PauseAnimation, { threshold: (_p = config.pauseAnimation) === null || _p === void 0 ? void 0 : _p.threshold, offset: (_q = config.pauseAnimation) === null || _q === void 0 ? void 0 : _q.offset }, node)));
                 }
             }
             // can filter for more node types and apply other wrappers below:
@@ -95,7 +95,10 @@ const Fig = ({ children, config, placeholder }) => {
             return child;
         }
         // calls recursive function, add more checks here if necessary
-        if (isLazyLoadEnabled || isDebounceEnabled || isThrottleEnabled || isAnimationDisableEnabled) {
+        if (isLazyLoadEnabled ||
+            isDebounceEnabled ||
+            isThrottleEnabled ||
+            isPauseAnimationEnabled) {
             return memoizedElementIsolator(child) || child;
         }
     };

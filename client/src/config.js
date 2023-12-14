@@ -51,8 +51,8 @@ export const throttleConfig = {
 // };
 
 
-export const animationDisableConfig = {
-  animationDisable: {
+export const pauseAnimationConfig = {
+  pauseAnimation: {
     threshold: 0.5,
     offset: "100px",
     classes: ['animate']

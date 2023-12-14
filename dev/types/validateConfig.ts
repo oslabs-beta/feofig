@@ -9,7 +9,7 @@ const validateConfigs = (config: Config) => {
     throw new Error('Configuration file must be an object!');
 
   // checks for additional unexpected properties
-  const allowedProps = ['lazyload', 'debounce', 'throttle', 'animationDisable'];
+  const allowedProps = ['lazyload', 'debounce', 'throttle', 'pauseAnimation'];
   const actualProps = Object.keys(config);
   const invalidProps = actualProps.filter(
     (prop) => !allowedProps.includes(prop)
@@ -131,12 +131,12 @@ const validateConfigs = (config: Config) => {
 
   // add more config validations below:
   // validates "lazyload"
-  if (config.animationDisable) {
-    const {threshold, offset, classes} = config.animationDisable;
+  if (config.pauseAnimation) {
+    const {threshold, offset, classes} = config.pauseAnimation;
 
     // checks for additional unexpected properties
     const allowedProps = ['threshold', 'offset', 'classes'];
-    const actualProps = Object.keys(config.animationDisable);
+    const actualProps = Object.keys(config.pauseAnimation);
     const invalidProps = actualProps.filter(
       (prop) => !allowedProps.includes(prop)
     );
@@ -154,7 +154,7 @@ const validateConfigs = (config: Config) => {
       (typeof threshold !== 'number' || threshold < 0 || threshold > 1)
     )
       throw new Error(
-        'DisableAnimations: threshold must be a valid number between 0 and 1'
+        'PauseAnimations: threshold must be a valid number between 0 and 1'
       );
 
     // validates "offset"
@@ -164,19 +164,19 @@ const validateConfigs = (config: Config) => {
       (typeof offset !== 'string' || !offsetPattern.test(offset))
     )
       throw new Error(
-        'DisableAnimations: offset must be a string containing a number followed by px. (Ex: "100px")'
+        'PauseAnimations: offset must be a string containing a number followed by px. (Ex: "100px")'
       );
 
     // validates "classes"
     if (classes !== undefined && !Array.isArray(classes)) {
-      throw new Error('DisableAnimations: classes must be an array');
+      throw new Error('PauseAnimations: classes must be an array');
     }
 
     if (classes !== undefined) {
       for (let el of classes) {
         if (typeof el !== 'string') {
           throw new Error(
-            'DisableAnimations: classes array can only contain strings'
+            'PauseAnimations: classes array can only contain strings'
           );
         }
       }
