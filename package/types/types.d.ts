@@ -4,6 +4,7 @@ export type Config = {
     throttle?: ThrottleConfig;
     debounce?: DebounceConfig;
     pauseAnimation?: PauseAnimationConfig;
+    validate?: Boolean;
 };
 export type LazyLoadConfig = {
     threshold?: number;
