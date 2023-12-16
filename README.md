@@ -14,6 +14,7 @@ FEOFig is a one-stop-shop library for various front-end optimization techniques 
 ➡️ Debouncing <br>
 ➡️ Throttling <br>
 ➡️ Pause Offscreen CSS Animations <br>
+➡️ Network Benchmarking Tool <br>
 
 🚀 TypeScript support
 
