@@ -1,7 +1,7 @@
 {
     "name": "feofig",
-    "version": "1.0.1",
-    "description": "Front-End Optimizer & Configurer",
+    "version": "1.0.2",
+    "description": "Front-end optimizer and configurer. Includes tools for lazyload, debounce, throttle, animation pause, & network benchmarks",
     "main": "feofig.js",
     "repository": {
         "type": "git",
