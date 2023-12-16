@@ -8,6 +8,7 @@ Turn complex front-end optimization into a simple task while maintaining readabi
 ## About
 FEOFig is a one-stop-shop library for various front-end optimization techniques that developers can configure and apply to elements using "figs", which are reusable drop-in wrappers containing your customized settings. After configuring settings for your desired technique(s) in a separate "config" file, the figs are ready to wrap around single, multiple, or even nested elements.
 
+
 ## Features
 ➡️ Lazy Loading <br>
 ➡️ Debouncing <br>
@@ -25,6 +26,7 @@ npm install feofig
 ## Usage 
 ### Fig Wrapper
 Import the Fig wrapper from the FEOFig library and wrap it around your code. The Fig wrapper will apply optimizations based on a "config" object passed into the "config" prop.
+
 ```javascript
 import Fig from 'feofig';
 import { configExample } from './config.js';
@@ -40,6 +42,8 @@ export default App;
 ```
 
 > NOTE: The Fig wrapper will apply optimizations to nested components but **WILL SKIP OVER** custom components.
+
+<br>
 
 ### Creating your configurations
 In the following example, a separate Javascript file is created containing the configs. Individual configs are exported and then imported into the files they will be used in.
@@ -74,9 +78,12 @@ export const debounceConfig = {
   }
 };
 ```
+<br>
 
 ## Configuration Documentation
-Configurations are objects consisting of optional keys `lazyload`, `debounce`, `throttle`, and `pauseAnimation` whose values are objects containing the options for that specific optimization.
+Configurations are objects consisting of optional keys `lazyload`, `debounce`, `throttle`, and `pauseAnimation` whose values are objects containing the options for that specific optimization.<br>
+
+<br>
 
 ### lazyload
 Images will only be fetched when the image element enters the browser viewport. Only works for `<img>` elements.
@@ -93,6 +100,7 @@ lazyload: {
 
 **_`offset`_**: A string indicating the margin of the browser viewport before elements are considered visible. Example: For `offset: "10px 0px 30px 0px"` (top, right, bottom, left), an image will load when it is 10px above or 30px below the browser viewport. If only one value is provided, it will apply to all sides. Percentages may be used as well.
 
+<br>
 
 ### debounce
 Applies debouncing to `onChange` function attached to following elements:<br>
@@ -112,6 +120,9 @@ debounce: {
 
 > Note: The function to be debounced should be given to the `onChange` attribute of any target element(s)<br>_For example:_<br>`<textarea onChange={handleChange}></textarea>`
 
+
+<br>
+
 ### throttle
 Applies throttling to `onChange` function attached to `<input>` element and `<textarea>` element
 ```javascript
@@ -125,6 +136,8 @@ throttle: {
 **_`minLength`_**: Minimum length of the input value for which the `onChange` function will be triggered. If the length of the input value is less than `minLength`, the `onChange` function will not be invoked.
 
 > Note: The function to be throttled should be given to the `onChange` attribute of any target element(s)<br>_For example:_<br>`<textarea onChange={handleChange}></textarea>`
+
+<br>
 
 ### pauseAnimation
 Pause any CSS animations applied to the element when it is outside of the browser viewport. 
@@ -140,6 +153,8 @@ pauseAnimation: {
 **_`offset`_**: A string indicating the margin of the browser viewport before elements are considered visible. Example: For offset: "10px 0px 30px 0px" (top, right, bottom, left), an element's CSS animation will be enabled when it is 10px above or 30px below the browser viewport. If only one value is provided, it will apply to all sides. 
 
 **_`classes`_**: An array of strings indicating which classes pauseAnimation will be applied to. For example, if `classes: ['animation']` is provided and an element `<div className='animation' />` is wrapped with the Fig wrapper, then the pauseAnimation optimization will be applied to that element. 
+
+<br>
 
 ## Running Benchmark Tests
 Benchmark app load times on your network by running the command: `npx feofig --port <PORT>` . The PORT will be the port number your app is currently running on, and will default to 8080 if not specified, as follows:  `npx feofig --port 8080`
@@ -170,6 +185,8 @@ Networks speeds are defined as follows:
 ```
 > NOTE: Benchmarks will time out if the page does not finish loading within 30 seconds.
 
+<br>
+
 ## Development
 ### Known Issues
 + Fig wrapper skips over custom elements
@@ -178,12 +195,16 @@ Networks speeds are defined as follows:
 
 If you find additional issues please open an issue on this repo!
 
+<br>
+
 ### How To Contribute
 **🙏 _We believe in the power of open source and its ability to inspire and improve the community. Any contributions are welcomed and encouraged!_ 🙏**<br><br>
 🍴 Fork me! <br>
 👐 Clone forked repo! <br>
 📋 Commit changes! <br>
 📤 Make a Pull Request! <br>
+
+<br>
 
 ## License
 Distributed under the MIT License.
