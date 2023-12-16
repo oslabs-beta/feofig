@@ -1,6 +1,6 @@
 {
   "name": "feofig",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Front-End Optimizer & Configurer",
   "main": "index.js",
   "scripts": {
