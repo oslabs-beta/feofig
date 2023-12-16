@@ -83,6 +83,7 @@ export const debounceConfig = {
 ## Configuration Documentation
 Configurations are objects consisting of optional keys `lazyload`, `debounce`, `throttle`, and `pauseAnimation` whose values are objects containing the options for that specific optimization.<br>
 
+<br>
 
 ### lazyload
 Images will only be fetched when the image element enters the browser viewport. Only works for `<img>` elements.
